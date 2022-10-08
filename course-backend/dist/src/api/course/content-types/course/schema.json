@@ -1,0 +1,93 @@
+{
+    "kind": "collectionType",
+    "collectionName": "courses",
+    "info": {
+        "singularName": "course",
+        "pluralName": "courses",
+        "displayName": "course",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "richtext"
+        },
+        "course_img": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        },
+        "duration": {
+            "type": "string"
+        },
+        "num_lessons": {
+            "type": "integer"
+        },
+        "language": {
+            "type": "string"
+        },
+        "price_type": {
+            "type": "enumeration",
+            "enum": [
+                "free",
+                "paid"
+            ]
+        },
+        "download_link": {
+            "type": "string"
+        },
+        "course_material_links": {
+            "type": "string"
+        },
+        "author": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::author.author",
+            "inversedBy": "courses"
+        },
+        "level": {
+            "type": "enumeration",
+            "enum": [
+                "beginner",
+                "intermediate",
+                "expert"
+            ],
+            "default": "beginner"
+        },
+        "categories": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::category.category",
+            "inversedBy": "courses"
+        },
+        "channel": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::channel.channel",
+            "inversedBy": "courses"
+        },
+        "topic": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::topic.topic",
+            "inversedBy": "courses"
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "name",
+            "required": true
+        }
+    }
+}

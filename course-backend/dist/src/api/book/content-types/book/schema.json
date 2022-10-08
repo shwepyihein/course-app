@@ -1,0 +1,68 @@
+{
+    "kind": "collectionType",
+    "collectionName": "books",
+    "info": {
+        "singularName": "book",
+        "pluralName": "books",
+        "displayName": "book",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "book_img": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        },
+        "description": {
+            "type": "richtext"
+        },
+        "is_recommend": {
+            "type": "boolean"
+        },
+        "author": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::author.author",
+            "inversedBy": "books"
+        },
+        "page_count": {
+            "type": "string"
+        },
+        "word_count": {
+            "type": "string"
+        },
+        "download_link": {
+            "type": "string"
+        },
+        "categories": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::category.category",
+            "mappedBy": "book"
+        },
+        "channel": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::channel.channel",
+            "inversedBy": "books"
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "name",
+            "required": true
+        }
+    }
+}

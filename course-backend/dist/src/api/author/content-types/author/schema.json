@@ -1,0 +1,48 @@
+{
+    "kind": "collectionType",
+    "collectionName": "authors",
+    "info": {
+        "singularName": "author",
+        "pluralName": "authors",
+        "displayName": "author",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "profile_url": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        },
+        "profile_links": {
+            "type": "string"
+        },
+        "courses": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::course.course",
+            "mappedBy": "author"
+        },
+        "books": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::book.book",
+            "mappedBy": "author"
+        },
+        "is_recommend": {
+            "type": "boolean"
+        }
+    }
+}
