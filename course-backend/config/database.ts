@@ -7,7 +7,8 @@ export default ({ env }) => ({
       database: env("DATABASE_NAME", "coursedb"),
       user: env("DATABASE_USERNAME", "courseuser"),
       password: env("DATABASE_PASSWORD", "password"),
-      ssl: env.bool("DATABASE_SSL", false),
+      schema: env("DATABASE_SCHEMA", "public"),
+      ssl: false,
     },
   },
 });
