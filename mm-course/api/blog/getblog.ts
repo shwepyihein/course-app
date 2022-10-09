@@ -63,12 +63,10 @@ export const getBlogFilter = async ({
 }
 
 export const getBlogsRecommend = async ({
-  locale = "en",
   start = 0,
   limit = 2,
 }): Promise<BlogEntity[]> => {
   const result = await client.request<Query>(FETCH_BLOG_RECOMMEND, {
-    locale,
     limit,
     start,
   })

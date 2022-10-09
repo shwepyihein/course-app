@@ -74,7 +74,7 @@ const BlogList = (props) => {
                       }}
                       className="md:flex md:space-x-6 py-5"
                     >
-                      <a href="blog-read.html">
+                      <div>
                         <div className="md:w-56 w-full h-36 overflow-hidden rounded-lg relative shadow-sm">
                           <img
                             src={"http://localhost:1337" + item?.url}
@@ -85,14 +85,11 @@ const BlogList = (props) => {
                             JavaScript
                           </div>
                         </div>
-                      </a>
+                      </div>
                       <div className="flex-1 md:pt-0 pt-4">
-                        <a
-                          href="blog-read.html"
-                          className="text-lg font-semibold line-clamp-2 leading-8"
-                        >
+                        <div className="text-lg font-semibold line-clamp-2 leading-8">
                           {item.title}
-                        </a>
+                        </div>
                         <p className="line-clamp-2">
                           {item.short_description.slice(0, 150)}
                         </p>
