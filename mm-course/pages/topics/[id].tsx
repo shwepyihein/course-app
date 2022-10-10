@@ -57,7 +57,7 @@ function CategoryPage({ slug }: CategoryPageProps) {
   )
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context: any) => {
   const slug = context.params.id as string
   try {
     // const TopicsList = await getTopicsList()
