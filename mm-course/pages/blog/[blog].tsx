@@ -4,6 +4,7 @@ import React from "react"
 import { getBlogDetail, getBlogLatest } from "../../api/blog/getblog"
 import Layout from "../../components/layout"
 import { Blog, BlogEntity } from "../../graphql/generated/gql_types"
+import { IMAGE_PATH } from "../../utils"
 
 interface blogDetailProps {
   blogData: Blog
@@ -21,10 +22,7 @@ const BlogDetail = ({ blogData, LatestBlog }: blogDetailProps) => {
             <div className="tube-card">
               <div className="h-44 mb-4 md:h-72 overflow-hidden relative rounded-t-lg w-full">
                 <img
-                  src={
-                    "http://localhost:1337" +
-                    blogData.seo_image?.data?.attributes?.url
-                  }
+                  src={`${IMAGE_PATH}${blogData.seo_image?.data?.attributes?.url}`}
                   alt=""
                   className="w-full h-full absolute inset-0 object-cover"
                 />

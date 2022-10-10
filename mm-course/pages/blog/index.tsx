@@ -7,7 +7,7 @@ import {
 } from "../../api/blog/getblog"
 import Layout from "../../components/layout"
 import { Blog } from "../../graphql/generated/gql_types"
-import { classNames } from "../../utils"
+import { classNames, IMAGE_PATH } from "../../utils"
 const tabs = [
   { name: "Suggestions", href: "#", current: false },
   { name: "Mobile", href: "#", current: false },
@@ -83,7 +83,7 @@ const BlogList = (props: BlogListProps) => {
                       <div>
                         <div className="md:w-56 w-full h-36 overflow-hidden rounded-lg relative shadow-sm">
                           <img
-                            src={"http://localhost:1337" + item?.url}
+                            src={IMAGE_PATH + item?.url}
                             alt=""
                             className="w-full h-full absolute inset-0 object-cover"
                           />
@@ -136,8 +136,7 @@ const BlogList = (props: BlogListProps) => {
                   <div className="flex items-start justify-between">
                     <div>
                       <h4 className="text-lg -mb-0.5 font-semibold">
-                        {" "}
-                        Recently Posted{" "}
+                        Recently Posted
                       </h4>
                     </div>
                     <a href="#" className="text-blue-600">

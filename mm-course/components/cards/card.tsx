@@ -1,15 +1,11 @@
 import React from "react"
 interface CardProps {
   post: any
-  key: number
 }
-function Card({ post, key }: CardProps) {
+function Card({ post }: CardProps) {
   return (
     <div>
-      <div
-        key={key}
-        className="flex flex-col overflow-hidden rounded-lg shadow-lg"
-      >
+      <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
         <div className="flex-shrink-0">
           <img
             className="h-48 w-full object-cover"

@@ -7,7 +7,7 @@ import BookCardSlide from "../../components/slide/bookCardSlide"
 
 import { Navigation } from "swiper"
 import BookCard from "../../components/cards/bookcard"
-import { classNames } from "../../utils"
+import { classNames, IMAGE_PATH } from "../../utils"
 import { getbooklistQuery, getBookRecommend } from "../../api/book/getBook"
 import { BookEntity } from "../../graphql/generated/gql_types"
 
@@ -130,13 +130,13 @@ const BookPage = (props: BookPageProps) => {
                       className="p-3 bg-white shadow rounded-md flex items-center space-x-3"
                     >
                       <img
-                        src={"http://localhost:1337" + item?.url}
+                        src={`${IMAGE_PATH}${item?.url}`}
                         className="w-20 h-24 rounded-lg -mt-7 shadow-md"
                         alt=""
                       />
                       <div className="flex-1">
                         <div className="font-semibold">{item.name}</div>
-                        <div className="text-sm">{item.author} </div>
+                        <div className="text-sm">{item?.author} </div>
                       </div>
                       <a href="#">
                         <ArrowDownTrayIcon className="w-5 h-5" />

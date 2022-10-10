@@ -76,8 +76,11 @@ export const getBlogsRecommend = async ({
       id: blog.id,
       slug: blog.attributes?.slug,
       title: blog.attributes?.title,
+      short_description: blog.attributes?.short_description,
       url: blog.attributes?.seo_image?.data?.attributes?.url,
       date: blog.attributes?.publishedAt,
+      publishedAt: blog.attributes?.publishedAt,
+
       // tag: blog.attributes?.tags,
     }
   })

@@ -77,7 +77,6 @@ export const FETCH_BLOG_RECOMMEND = gql`
   query getblogsRecommands($limit: Int, $start: Int) {
     blogs(
       pagination: { start: $start, limit: $limit }
-      filters: { is_recommend: { eq: true } }
       sort: ["publishedAt:desc"]
     ) {
       meta {
@@ -92,6 +91,7 @@ export const FETCH_BLOG_RECOMMEND = gql`
         attributes {
           title
           publishedAt
+          short_description
           description
           slug
           seo_image {

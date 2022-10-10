@@ -5,6 +5,7 @@ import { getBookDetail, getBookLatest } from "../../api/book/getBook"
 import Layout from "../../components/layout"
 import BookCardSlide from "../../components/slide/bookCardSlide"
 import { Book, BookEntity } from "../../graphql/generated/gql_types"
+import { IMAGE_PATH } from "../../utils"
 
 interface BookDetailProps {
   bookData: Book
@@ -25,10 +26,8 @@ const BookDetail = ({ bookData, LatestBook }: BookDetailProps) => {
               <div uk-lightbox="">
                 <img
                   alt="image"
-                  src={
-                    "http://localhost:1337" +
-                    bookData?.book_img?.data?.attributes?.url
-                  }
+                  src={`
+                    ${IMAGE_PATH}${bookData?.book_img?.data?.attributes?.url}`}
                   className="shadow-lg rounded-md w-32 md:w-full"
                 />
 

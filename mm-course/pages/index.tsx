@@ -17,6 +17,7 @@ interface HomePageProps {
 
 const HomePage = (props: HomePageProps) => {
   const router = useRouter()
+  console.log(process.env.IMAGE_PATH)
   return (
     <Layout>
       <main>
@@ -392,6 +393,7 @@ export const getServerSideProps = async ({}) => {
       limit: 10,
       start: 0,
     })
+    console.log(LatestBook)
 
     return {
       props: {

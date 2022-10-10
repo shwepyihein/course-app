@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import React from "react"
+import { IMAGE_PATH } from "../../utils"
 interface CardProps {
   post: any
   key: number
@@ -17,7 +18,7 @@ function BookCard({ post, key }: CardProps) {
       <div className="">
         <img
           className="h-52 w-full  object-cover"
-          src={"http://localhost:1337" + post?.url}
+          src={IMAGE_PATH + post?.url}
           alt=""
         />
       </div>

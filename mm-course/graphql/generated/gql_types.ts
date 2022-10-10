@@ -542,7 +542,7 @@ export enum Enum_Course_Level {
 
 export enum Enum_Course_Price_Type {
   Free = 'free',
-  Premium = 'premium'
+  Paid = 'paid'
 }
 
 export type FileInfoInput = {

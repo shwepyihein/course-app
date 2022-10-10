@@ -45,7 +45,7 @@ export const getBookRecommend = async ({
       slug: book.attributes?.slug,
       url: book.attributes?.book_img?.data?.attributes?.url ?? "",
       date: book.attributes?.publishedAt,
-      author: book.attributes?.author?.data?.attributes?.name,
+      author: book.attributes?.author?.data?.attributes?.name ?? "",
     }
   })
 
@@ -68,7 +68,8 @@ export const getBookLatest = async ({
       slug: book.attributes?.slug,
       url: book.attributes?.book_img?.data?.attributes?.url ?? "",
       date: book.attributes?.publishedAt,
-      author: book.attributes?.author?.data?.attributes?.name,
+      publishedAt: book.attributes?.publishedAt,
+      // author: book.attributes?.author?.data?.attributes?.name,
     }
   })
 
