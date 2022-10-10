@@ -88,9 +88,7 @@ const BookDetail = ({ bookData, LatestBook }: BookDetailProps) => {
               <hr className="mb-5" />
               <h4 className="font-semibold mb-2 text-base"> Description </h4>
               <div className="space-y-2">
-                <div
-                  dangerouslySetInnerHTML={{ __html: bookData.description }}
-                ></div>
+                <div>{bookData.description}</div>
                 <h4>Book Information</h4>
                 <p className="mb-0">
                   <strong>Page Count</strong>: {bookData.page_count}

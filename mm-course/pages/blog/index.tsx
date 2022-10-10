@@ -14,7 +14,13 @@ const tabs = [
   { name: "Web", href: "#", current: true },
 ]
 
-const BlogList = (props) => {
+interface BlogListProps {
+  BlogList: any
+  recommendBlog: any
+  page: any
+}
+
+const BlogList = (props: BlogListProps) => {
   const router = useRouter()
   return (
     <Layout>

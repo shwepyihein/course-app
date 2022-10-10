@@ -18,13 +18,20 @@ interface filterType {
   channel: string[]
   type: string
 }
+interface CourseFilterPage {
+  categoryList: any
+  filterOpiton: any
+  courserData: any
+  channelList: any
+  filterQuery: any
+}
 const CourseFilterPage = ({
   categoryList,
   filterOpiton,
   courserData,
   channelList,
   filterQuery,
-}) => {
+}: CourseFilterPage) => {
   const [filterList, setFilterList] = useState<filterType>({
     page: "",
     category: [],
@@ -303,7 +310,7 @@ export const getServerSideProps = async ({
     category: categoryParams = null,
     channel: channelParams = null,
   },
-}) => {
+}: any) => {
   const filterQuery: any = []
   let type
 

@@ -18,8 +18,13 @@ const tabs = [
   { name: "Offer", href: "#", current: false },
   { name: "Hired", href: "#", current: false },
 ]
+interface BookPageProps {
+  booklist: any
+  recommendBook: any
+  page: any
+}
 
-const BookPage = (props) => {
+const BookPage = (props: BookPageProps) => {
   console.log(props)
   return (
     <Layout>
