@@ -13,3 +13,25 @@ export const GET_CATEGORY_LIST = gql`
     }
   }
 `
+
+export const GET_CATEGORY_ROUTE = gql`
+  query getRoute {
+    topics {
+      data {
+        id
+        attributes {
+          name
+          categories {
+            data {
+              id
+              attributes {
+                name
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`

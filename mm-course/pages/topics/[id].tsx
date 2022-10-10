@@ -1,17 +1,17 @@
 import React from "react"
-import Layout from "../components/layout"
+import Layout from "../../components/layout"
 
 interface CategoryPageProps {
-  type: any
+  slug: any
 }
 
-function CategoryPage({ type }: CategoryPageProps) {
+function CategoryPage({ slug }: CategoryPageProps) {
   return (
     <Layout>
       <div className="bg-gray-100 py-12">
         <div className="mx-auto min-h-[500px] max-w-7xl py-12 px-4 text-center sm:px-6">
           <h4 className="text-2xl text-start pb-5 font-bold">
-            All Course about {type}
+            All Topics about {slug}
           </h4>
           <div
             role="list"
@@ -57,12 +57,13 @@ function CategoryPage({ type }: CategoryPageProps) {
   )
 }
 
-export const getServerSideProps = async ({ query: { type = null } }: any) => {
+export const getServerSideProps = async (context) => {
+  const slug = context.params.id as string
   try {
     // const TopicsList = await getTopicsList()
     return {
       props: {
-        type,
+        slug,
       },
     }
   } catch (e) {

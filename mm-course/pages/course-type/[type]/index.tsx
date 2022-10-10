@@ -211,7 +211,7 @@ const CourseFilterPage = ({
                       title="Popular"
                       aria-expanded="false"
                     >
-                      <span className="filter-option pull-left">Popular</span>
+                      <span className="filter-option pull-left">Free</span>
                       &nbsp;
                       <span className="bs-caret">
                         <span className="caret"></span>

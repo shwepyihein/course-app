@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import {
   Bars3Icon,
@@ -10,28 +10,39 @@ import {
 import { useScrollPosition } from "../hooks/scrollhooks"
 import { classNames } from "../utils"
 import { useRouter } from "next/router"
+import CategoryDropdown from "./categoryDropDown"
+import MenuItems from "./categoryDropDown/MenuItem"
+import { getCategoryRoute } from "../api/category/category"
 
 const navigation = [
-  { name: "Categories", href: "/category", current: false },
+  { name: "Categories", route: "/category", current: false },
   {
     name: "Courses",
     href: "/course",
     current: true,
     menu: true,
     submenu: [
-      { name: "Popular", href: "/course-type/popular" },
-      { name: "Free", href: "/course-type/popular" },
+      // { name: "Popular", href: "/course-type/popular" },
+      { name: "Free", route: "/course-type/free" },
     ],
   },
-  { name: "Topics", href: "/topics", current: false },
-  { name: "Book", href: "/book", current: false },
-  { name: "Blog", href: "/blog", current: false },
+  { name: "Topics", route: "/topics", current: false },
+  { name: "Book", route: "/book", current: false },
+  { name: "Blog", route: "/blog", current: false },
 ]
 
 export default function Navbar() {
   const scrollPosition = useScrollPosition()
   const router = useRouter()
 
+  const [routeList, setRouteList] = useState<any[]>([])
+  const fetchroute = async () => {
+    await getCategoryRoute().then((res) => setRouteList(res))
+  }
+
+  useEffect(() => {
+    fetchroute()
+  }, [])
   return (
     <Disclosure
       as="nav"
@@ -82,77 +93,17 @@ export default function Navbar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item, i) => {
-                      if (item.menu) {
+                      if (item.name === "Categories") {
                         return (
-                          <Menu
+                          <MenuItems
                             key={i}
-                            as="div"
-                            className="relative inline-block text-left"
-                          >
-                            <div>
-                              <Menu.Button className="inline-flex w-full justify-center  px-4 py-2 text-sm font-medium text-gray-400  ">
-                                {item.name}
-                                <ChevronDownIcon
-                                  className="-mr-1 ml-2 h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              </Menu.Button>
-                            </div>
-
-                            <Transition
-                              as={Fragment}
-                              enter="transition ease-out duration-100"
-                              enterFrom="transform opacity-0 scale-95"
-                              enterTo="transform opacity-100 scale-100"
-                              leave="transition ease-in duration-75"
-                              leaveFrom="transform opacity-100 scale-100"
-                              leaveTo="transform opacity-0 scale-95"
-                            >
-                              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="py-1">
-                                  {item?.submenu.map((item) => {
-                                    return (
-                                      <Menu.Item key={item.name}>
-                                        {({ active }) => (
-                                          <a
-                                            href={item.href}
-                                            className={classNames(
-                                              active
-                                                ? "bg-gray-100 text-gray-900"
-                                                : "text-gray-700",
-                                              "block px-4 py-2 text-sm"
-                                            )}
-                                          >
-                                            {item.name}
-                                          </a>
-                                        )}
-                                      </Menu.Item>
-                                    )
-                                  })}
-                                </div>
-                              </Menu.Items>
-                            </Transition>
-                          </Menu>
+                            items={{ name: "categories", submenu: routeList }}
+                            depthLevel={0}
+                          />
                         )
                       }
 
-                      return (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.href === router.pathname
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "px-3 py-2 rounded-md text-sm font-medium"
-                          )}
-                          aria-current={
-                            item.href === router.pathname ? "page" : undefined
-                          }
-                        >
-                          {item.name}
-                        </a>
-                      )
+                      return <MenuItems key={i} items={item} depthLevel={0} />
                     })}
                   </div>
                 </div>

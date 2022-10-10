@@ -1,6 +1,6 @@
 import getConfig from "next/config"
 
-const { publicRuntimeConfig } = getConfig()
+const { env } = getConfig()
 
 export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
