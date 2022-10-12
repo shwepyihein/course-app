@@ -49,6 +49,9 @@
       "relation": "oneToMany",
       "target": "api::blog.blog",
       "mappedBy": "topic"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
