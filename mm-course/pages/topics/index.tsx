@@ -1,7 +1,8 @@
-import { getTopicsList } from "../api/topics/topics"
-import Layout from "../components/layout"
-import { TopicEntity } from "../graphql/generated/gql_types"
-import { IMAGE_PATH } from "../utils"
+import { useRouter } from "next/router"
+import { getTopicsList } from "../../api/topics/topics"
+import Layout from "../../components/layout"
+import { TopicEntity } from "../../graphql/generated/gql_types"
+import { IMAGE_PATH } from "../../utils"
 
 interface TopicsListProps {
   TopicsList: TopicEntity[]
@@ -9,6 +10,7 @@ interface TopicsListProps {
 
 export default function TopicsList({ TopicsList }: TopicsListProps) {
   console.log(TopicsList)
+  const router = useRouter()
   return (
     <Layout>
       <div className="bg-gray-100">
@@ -37,6 +39,9 @@ export default function TopicsList({ TopicsList }: TopicsListProps) {
           {TopicsList.map((topic) => (
             <li
               key={topic.id}
+              onClick={() => {
+                router.push(`/topics/${topic.id}`)
+              }}
               className="space-y-4 mx-auto bg-gray-100 p-10 w-full rounded cursor-pointer"
             >
               <div className="min-w-full flex flex-col justify-center items-center">

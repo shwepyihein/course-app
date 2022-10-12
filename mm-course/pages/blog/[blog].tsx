@@ -41,7 +41,7 @@ const BlogDetail = ({ blogData, LatestBlog }: blogDetailProps) => {
                     </div>
                     <div className="text-xs">
                       Published on{" "}
-                      {moment(blogData.publishedAt).format("MM DD YY")}
+                      {moment(blogData.publishedAt).format("MM/DD/YY")}
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ const BlogDetail = ({ blogData, LatestBlog }: blogDetailProps) => {
                         </h3>
                         <div className="flex items-center my-auto text-xs space-x-1.5 mt-1.5">
                           <div>
-                            {moment(item?.publishedAt).format("MMM DD YYYY")}
+                            {moment(item?.publishedAt).format("MM/DD/YYYY")}
                           </div>{" "}
                           <div className="pb-1"> . </div>
                           {/* <ion-icon name="chatbox-ellipses-outline" role="img" className="md hydrated" aria-label="chatbox ellipses outline"></ion-icon> <div> 23</div> */}

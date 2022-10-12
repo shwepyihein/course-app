@@ -35,3 +35,22 @@ export const GET_CATEGORY_ROUTE = gql`
     }
   }
 `
+
+export const Get_CateoryCourse_List = gql`
+  query getBooks($limit: Int, $start: Int) {
+    categories(pagination: { start: $start, limit: $limit }) {
+      data {
+        id
+        attributes {
+          name
+          courses {
+            data {
+              id
+            }
+          }
+          slug
+        }
+      }
+    }
+  }
+`

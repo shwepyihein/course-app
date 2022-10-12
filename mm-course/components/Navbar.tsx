@@ -83,7 +83,7 @@ export default function Navbar() {
                     className="block h-8 w-auto lg:hidden"
                     src={
                       scrollPosition < 20 && router.pathname === "/"
-                        ? "/logo_1.svg"
+                        ? "/logo_3.svg"
                         : "/logo_3.svg"
                     }
                     alt="Your Company"
@@ -92,7 +92,7 @@ export default function Navbar() {
                     className="hidden h-8 w-auto lg:block"
                     src={
                       scrollPosition < 20 && router.pathname === "/"
-                        ? "/logo_1.svg"
+                        ? "/logo_3.svg"
                         : "/logo_3.svg"
                     }
                     alt="Your Company"

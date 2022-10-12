@@ -4,7 +4,11 @@ import {
   TopicEntity,
 } from "../../graphql/generated/gql_types"
 import client from "../client"
-import { GET_CATEGORY_LIST, GET_CATEGORY_ROUTE } from "./category.gql"
+import {
+  GET_CATEGORY_LIST,
+  GET_CATEGORY_ROUTE,
+  Get_CateoryCourse_List,
+} from "./category.gql"
 
 export const getCategoryList = async (): Promise<CategoryEntity[] | {}> => {
   const result = await client.request<Query>(GET_CATEGORY_LIST)
@@ -34,4 +38,16 @@ export const getCategoryRoute = async () => {
   })
   console.log(filterRoute)
   return filterRoute ?? []
+}
+
+export const getCategoryCourseList = async ({
+  start = 0,
+  limit = 6,
+}): Promise<CategoryEntity[] | []> => {
+  const result = await client.request<Query>(Get_CateoryCourse_List, {
+    limit,
+    start,
+  })
+
+  return result.categories?.data ?? []
 }

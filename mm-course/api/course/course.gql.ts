@@ -57,14 +57,44 @@ export const GET_COURSE_LIST_FILTER = gql`
   }
 `
 
-export const GET_COURSE_LIST = gql`
-  query getCategoryList {
-    categories {
+export const GET_LATEST_COURSE = gql`
+  query getCourseFilter($limit: Int, $start: Int) {
+    courses(
+      pagination: { start: $start, limit: $limit }
+      sort: ["publishedAt:desc"]
+    ) {
       data {
         id
         attributes {
           name
+          description
+          duration
           slug
+          language
+          publishedAt
+          num_lessons
+          course_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+
+          categories {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          author {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
         }
       }
     }
