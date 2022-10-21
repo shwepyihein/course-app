@@ -36,7 +36,7 @@ export default function CategoryPage({ categoryList }: TopicsListProps) {
           role="list"
           className="mx-auto grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4"
         >
-          {categoryList.map((cat) => (
+          {categoryList.map((cat: CategoryEntity) => (
             <li
               key={cat.id}
               onClick={() => {
@@ -45,7 +45,13 @@ export default function CategoryPage({ categoryList }: TopicsListProps) {
               className="space-y-4 mx-auto bg-gray-100 p-10 w-full rounded cursor-pointer"
             >
               <div className="min-w-full flex flex-col justify-center items-center">
-                <img className="object-cover w-24" src={`/logo_3.svg`} alt="" />
+                <img
+                  className="object-cover w-24"
+                  src={
+                    IMAGE_PATH + cat.attributes?.image?.data?.attributes?.url
+                  }
+                  alt=""
+                />
                 <div className="space-y-2 mt-5">
                   <div className="text-xl font-medium lg:text-sm">
                     <h3>{cat.attributes?.name}</h3>

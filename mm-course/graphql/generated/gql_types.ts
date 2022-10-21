@@ -276,6 +276,8 @@ export type Category = {
   book?: Maybe<BookEntityResponse>;
   courses?: Maybe<CourseRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<UploadFileEntityResponse>;
   name?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Scalars['String']>;
@@ -314,6 +316,7 @@ export type CategoryFiltersInput = {
   book?: InputMaybe<BookFiltersInput>;
   courses?: InputMaybe<CourseFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<CategoryFiltersInput>;
@@ -328,6 +331,8 @@ export type CategoryInput = {
   blog?: InputMaybe<Scalars['ID']>;
   book?: InputMaybe<Scalars['ID']>;
   courses?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  description?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
@@ -426,6 +431,7 @@ export type Course = {
   description?: Maybe<Scalars['String']>;
   download_link?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['String']>;
+  is_recommend?: Maybe<Scalars['Boolean']>;
   language?: Maybe<Scalars['String']>;
   level?: Maybe<Enum_Course_Level>;
   name?: Maybe<Scalars['String']>;
@@ -473,6 +479,7 @@ export type CourseFiltersInput = {
   download_link?: InputMaybe<StringFilterInput>;
   duration?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
+  is_recommend?: InputMaybe<BooleanFilterInput>;
   language?: InputMaybe<StringFilterInput>;
   level?: InputMaybe<StringFilterInput>;
   name?: InputMaybe<StringFilterInput>;
@@ -495,6 +502,7 @@ export type CourseInput = {
   description?: InputMaybe<Scalars['String']>;
   download_link?: InputMaybe<Scalars['String']>;
   duration?: InputMaybe<Scalars['String']>;
+  is_recommend?: InputMaybe<Scalars['Boolean']>;
   language?: InputMaybe<Scalars['String']>;
   level?: InputMaybe<Enum_Course_Level>;
   name?: InputMaybe<Scalars['String']>;
@@ -1217,6 +1225,7 @@ export type Topic = {
   channels?: Maybe<ChannelRelationResponseCollection>;
   courses?: Maybe<CourseRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
   icon?: Maybe<UploadFileRelationResponseCollection>;
   name?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -1286,6 +1295,7 @@ export type TopicFiltersInput = {
   channels?: InputMaybe<ChannelFiltersInput>;
   courses?: InputMaybe<CourseFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   name?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<TopicFiltersInput>;
@@ -1299,6 +1309,7 @@ export type TopicInput = {
   categories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   channels?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   courses?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  description?: InputMaybe<Scalars['String']>;
   icon?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   name?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;

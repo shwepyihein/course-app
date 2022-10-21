@@ -1,17 +1,20 @@
 import React from "react"
+import { getCategoryCourseListDetail } from "../../api/category/category"
 import Layout from "../../components/layout"
+import { Category } from "../../graphql/generated/gql_types"
 
 interface CategoryPageProps {
-  type: any
+  categoryCourseList: Category
 }
 
-function CategoryPage({ type }: CategoryPageProps) {
+function CategoryPage({ categoryCourseList }: CategoryPageProps) {
+  console.log(categoryCourseList)
   return (
     <Layout>
       <div className="bg-gray-100 py-12">
         <div className="mx-auto min-h-[500px] max-w-7xl py-12 px-4 text-center sm:px-6">
           <h4 className="text-2xl text-start pb-5 font-bold">
-            All Course about {type}
+            All Course about {categoryCourseList.name}
           </h4>
           <div
             role="list"
@@ -57,12 +60,14 @@ function CategoryPage({ type }: CategoryPageProps) {
   )
 }
 
-export const getServerSideProps = async ({ query: { type = null } }: any) => {
+export const getServerSideProps = async (context: any) => {
+  const slug = context.params.id as string
+  console.log(slug, "asd")
   try {
-    // const TopicsList = await getTopicsList()
+    const categoryCourseList = await getCategoryCourseListDetail({ id: slug })
     return {
       props: {
-        type,
+        categoryCourseList,
       },
     }
   } catch (e) {

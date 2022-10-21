@@ -54,8 +54,8 @@ const HomePage = (props: HomePageProps) => {
   return (
     <Layout>
       <main>
-        <div className="bg-hero-pattern bg-cover ">
-          <div className="mx-auto max-w-7xl py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-60">
+        <div className="bg-hero-pattern bg-cover bg-position-center ">
+          <div className="mx-auto max-w-7xl py-60 px-4 text-center sm:px-6 lg:px-8 lg:py-80">
             <div className="space-y-8 sm:space-y-12">
               <div className="space-y-5 mr-auto sm:max-w-xl text-start  lg:max-w-5xl">
                 <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -108,7 +108,7 @@ const HomePage = (props: HomePageProps) => {
               <div className="mt-2 grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 gap-2 -m-3">
                 {props.categoryList.map((item) => {
                   return (
-                    <a key={item.id}>
+                    <Link key={item.id} href={`/category/${item.id}`}>
                       <div className="hover:bg-gray-100 flex items-start px-3 py-2 rounded-lg space-x-3">
                         <div>
                           <h3 className="font-semibold text-lg">
@@ -121,7 +121,7 @@ const HomePage = (props: HomePageProps) => {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   )
                 })}
               </div>

@@ -1,13 +1,21 @@
 import { gql } from "graphql-request"
 
 export const GET_CATEGORY_LIST = gql`
-  query getCategoryList {
-    categories {
+  query getCategoryList($limit: Int, $start: Int) {
+    categories(pagination: { start: $start, limit: $limit }) {
       data {
         id
+        __typename
         attributes {
           name
           slug
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
         }
       }
     }
@@ -49,6 +57,19 @@ export const Get_CateoryCourse_List = gql`
             }
           }
           slug
+        }
+      }
+    }
+  }
+`
+
+export const CATEGORY_COURSE_LIST = gql`
+  query getCateogrycourse($categoryId: ID) {
+    courses(filters: { categories: { id: { eq: $categoryId } } }) {
+      data {
+        id
+        attributes {
+          name
         }
       }
     }
