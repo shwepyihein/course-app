@@ -36,13 +36,9 @@ function CategoryPage({ slug, TopicCourseList }: CategoryPageProps) {
                       />
                     </div>
                     <div className="pt-3 text-start">
-                      <a
-                        href="blog-read.html"
-                        className="font-semibold line-clamp-2"
-                        g
-                      >
+                      <div className="font-semibold line-clamp-2">
                         {item.attributes?.name}
-                      </a>
+                      </div>
                       <div className="pt-2">
                         <p className="text-sm"> {item.attributes?.name}</p>
                         <div className="flex space-x-2 items-center text-xs">

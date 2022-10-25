@@ -115,6 +115,8 @@ export const FETCH_COURSE_DETAIL = gql`
           publishedAt
           num_lessons
           level
+          course_material_links
+          download_link
           course_img {
             data {
               attributes {

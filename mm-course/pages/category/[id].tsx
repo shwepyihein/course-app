@@ -29,23 +29,17 @@ function CategoryPage({ categoryCourseList, slug }: CategoryPageProps) {
               categoryCourseList?.map((item: CourseEntity) => {
                 return (
                   <div key={item.id}>
-                    <a
-                      href="blog-read.html"
-                      className="w-full md:h-40 h-32 overflow-hidden rounded-lg relative block"
-                    >
+                    <div className="w-full md:h-40 h-32 overflow-hidden rounded-lg relative block">
                       <img
                         src={`${IMAGE_PATH}${item.attributes?.course_img?.data?.attributes?.url}`}
                         alt=""
                         className="w-full h-full absolute inset-0 object-cover"
                       />
-                    </a>
+                    </div>
                     <div className="pt-3 text-start">
-                      <a
-                        href="blog-read.html"
-                        className="font-semibold line-clamp-2"
-                      >
+                      <div className="font-semibold line-clamp-2">
                         {item.attributes?.name}
-                      </a>
+                      </div>
                       <div className="pt-2">
                         <p className="text-sm"> {item.attributes?.name}</p>
                         <div className="flex space-x-2 items-center text-xs">

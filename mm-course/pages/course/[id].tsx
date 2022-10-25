@@ -20,7 +20,16 @@ interface BookDetailProps {
 
 const BookDetail = ({ CourseData }: BookDetailProps) => {
   const router = useRouter()
-  console.log(CourseData)
+  const downloadBook = (v: any) => {
+    let link = document.createElement("a")
+    link.href = v
+    link.setAttribute("download", `${CourseData.attributes?.name}`)
+    document.body.appendChild(link)
+    link.click()
+
+    // Clean up and remove the link
+    // link?.parentNode.removeChild(link)
+  }
   return (
     <Layout>
       <div className="max-w-5xl mt-20 min-h-screen mb-0 md:p-5 mx-auto">
@@ -37,19 +46,6 @@ const BookDetail = ({ CourseData }: BookDetailProps) => {
                     ${IMAGE_PATH}${CourseData?.attributes?.course_img?.data?.attributes?.url}`}
                   className="shadow-lg rounded-md w-32 md:w-full"
                 />
-
-                <a
-                  href="http://demo.foxthemes.net/courseplus-v4.3.1/assets/images/book/book-description.jpg"
-                  data-caption="Caption 2"
-                >
-                  {" "}
-                </a>
-                <a
-                  href="http://demo.foxthemes.net/courseplus-v4.3.1/assets/images/book/book-description.jpg"
-                  data-caption="Caption 3"
-                >
-                  {" "}
-                </a>
               </div>
               <div className="flex-1">
                 <ul className="my-5 text-sm space-y-2">
@@ -64,21 +60,32 @@ const BookDetail = ({ CourseData }: BookDetailProps) => {
                   {/* <li> Downloaded 120 </li> */}
                 </ul>
                 <div className="flex flex-col gap-2">
-                  <a
-                    href="#"
-                    className="hover:text-gray-800 bg-gray-300 font-semibold inline-flex items-center justify-center py-2 rounded-md text-center w-full"
-                  >
-                    {" "}
-                    <i className="uil-book-open mr-1 md:block hidden"></i> Read{" "}
-                  </a>
-                  <a
-                    href="#"
-                    className="hover:text-white-800 text-white bg-gray-600 font-semibold inline-flex items-center justify-center py-2 rounded-md text-center w-full"
-                  >
-                    {" "}
-                    <i className="uil-book-open mr-1 md:block hidden"></i>{" "}
-                    Download{" "}
-                  </a>
+                  {CourseData.attributes?.course_material_links && (
+                    <div
+                      onClick={() => {
+                        downloadBook(
+                          CourseData.attributes?.course_material_links
+                        )
+                      }}
+                      className="hover:text-gray-800 bg-gray-300 font-semibold inline-flex items-center justify-center py-2 rounded-md text-center w-full"
+                    >
+                      {" "}
+                      <i className="uil-book-open mr-1 md:block hidden"></i>{" "}
+                      Download material{" "}
+                    </div>
+                  )}
+                  {CourseData.attributes?.download_link && (
+                    <div
+                      onClick={() => {
+                        downloadBook(CourseData.attributes?.download_link)
+                      }}
+                      className="hover:text-white-800 text-white bg-gray-600 font-semibold inline-flex items-center justify-center py-2 rounded-md text-center w-full"
+                    >
+                      {" "}
+                      <i className="uil-book-open mr-1 md:block hidden"></i>{" "}
+                      Download{" "}
+                    </div>
+                  )}
                   {/* <a
                     href="#"
                     className="bg-gray-600 font-semibold hover:bg-gray-700 inline-flex items-center justify-center px-4 py-2 rounded-md text-center text-white w-full"

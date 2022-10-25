@@ -142,9 +142,9 @@ const BookPage = (props: BookPageProps) => {
                         <div className="font-semibold">{item.name}</div>
                         <div className="text-sm">{item?.author} </div>
                       </div>
-                      <a href="#">
+                      <div>
                         <ArrowDownTrayIcon className="w-5 h-5" />
-                      </a>
+                      </div>
                     </div>
                   )
                 })}
