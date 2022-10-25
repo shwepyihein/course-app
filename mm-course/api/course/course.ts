@@ -1,6 +1,10 @@
 import { CourseEntity, Query } from "../../graphql/generated/gql_types"
 import client from "../client"
-import { GET_LATEST_COURSE, GET_COURSE_LIST_FILTER } from "./course.gql"
+import {
+  GET_LATEST_COURSE,
+  GET_COURSE_LIST_FILTER,
+  FETCH_COURSE_DETAIL,
+} from "./course.gql"
 
 export const getCourseListFIlter = async ({ start = 0, limit = 10 }) => {
   const result = await client.request<Query>(GET_COURSE_LIST_FILTER, {
@@ -46,6 +50,7 @@ export const getCourseFilter = async ({
       preivew_image: course.attributes?.course_img?.data?.attributes?.url ?? "",
       language: course.attributes?.language,
       author: course.attributes?.author?.data?.attributes?.name ?? "",
+      level: course.attributes?.level ?? "",
     }
   })
 
@@ -78,4 +83,14 @@ export const getLatestCourse = async ({ limit = 6, start = 0 }) => {
   })
 
   return CouserList ?? []
+}
+
+export const getCourseDetail = async ({
+  slug = "",
+}): Promise<CourseEntity | Record<string, never>> => {
+  const result = await client.request<Query>(FETCH_COURSE_DETAIL, {
+    courseId: slug,
+  })
+
+  return result.course?.data ?? {}
 }

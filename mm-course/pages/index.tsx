@@ -23,30 +23,40 @@ interface HomePageProps {
 const FindInterst = [
   {
     name: "Frontend",
-    route: "",
+    route: "frontend-1",
     imgpath: "/frontend.jpeg",
     size: "lg:h-48 h-40",
   },
   {
     name: "Backend",
-    route: "",
+    route: "backend-2",
     imgpath: "/backend.jpeg",
     size: "lg:h-48 h-40",
   },
-  { name: "Designs", route: "", imgpath: "/design.png", size: "lg:h-48 h-40" },
+  {
+    name: "Designs",
+    route: "designs-3",
+    imgpath: "/design.png",
+    size: "lg:h-48 h-40",
+  },
   {
     name: "Mobile Development",
-    route: "",
+    route: "mobile-development-4",
     imgpath: "/mobile.jpeg",
     size: " h-40 lg:h-full lg:row-span-2",
   },
   {
     name: "Quality Assurance (QA)",
-    route: "",
+    route: "quality-assurance-6",
     imgpath: "/qa.jpeg",
     size: "lg:h-48 h-40 lg:col-span-2",
   },
-  { name: "Game", route: "", imgpath: "/latestGame.jpg", size: "lg:h-48 h-40" },
+  {
+    name: "Game",
+    route: "game-5",
+    imgpath: "/latestGame.jpg",
+    size: "lg:h-48 h-40",
+  },
 ]
 const HomePage = (props: HomePageProps) => {
   const router = useRouter()

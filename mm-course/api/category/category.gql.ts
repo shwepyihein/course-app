@@ -70,6 +70,76 @@ export const CATEGORY_COURSE_LIST = gql`
         id
         attributes {
           name
+          description
+          duration
+          slug
+          language
+          publishedAt
+          num_lessons
+          course_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+
+          categories {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          author {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const TOPIC_COURSE_LIST = gql`
+  query getCateogrycourse($topicId: ID) {
+    courses(filters: { topic: { id: { eq: $topicId } } }) {
+      data {
+        id
+        attributes {
+          name
+          description
+          duration
+          slug
+          language
+          publishedAt
+          num_lessons
+          level
+          course_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+
+          categories {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          author {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
         }
       }
     }

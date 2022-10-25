@@ -100,3 +100,45 @@ export const GET_LATEST_COURSE = gql`
     }
   }
 `
+
+export const FETCH_COURSE_DETAIL = gql`
+  query getCourseDetail($courseId: ID!) {
+    course(id: $courseId) {
+      data {
+        id
+        attributes {
+          name
+          description
+          duration
+          slug
+          language
+          publishedAt
+          num_lessons
+          level
+          course_img {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+
+          categories {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          author {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`

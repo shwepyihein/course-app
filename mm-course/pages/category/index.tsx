@@ -10,7 +10,6 @@ interface TopicsListProps {
 }
 
 export default function CategoryPage({ categoryList }: TopicsListProps) {
-  console.log(categoryList)
   const router = useRouter()
   return (
     <Layout>
@@ -40,16 +39,14 @@ export default function CategoryPage({ categoryList }: TopicsListProps) {
             <li
               key={cat.id}
               onClick={() => {
-                router.push(`/category/${cat.id}`)
+                router.push(`/category/${cat.attributes?.slug}-${cat.id}`)
               }}
               className="space-y-4 mx-auto bg-gray-100 p-10 w-full rounded cursor-pointer"
             >
               <div className="min-w-full flex flex-col justify-center items-center">
                 <img
                   className="object-cover w-24"
-                  src={
-                    IMAGE_PATH + cat.attributes?.image?.data?.attributes?.url
-                  }
+                  src={`${IMAGE_PATH}${cat.attributes?.image?.data?.attributes?.url}`}
                   alt=""
                 />
                 <div className="space-y-2 mt-5">

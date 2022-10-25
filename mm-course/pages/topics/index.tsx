@@ -40,7 +40,12 @@ export default function TopicsList({ TopicsList }: TopicsListProps) {
             <li
               key={topic.id}
               onClick={() => {
-                router.push(`/topics/${topic.id}`)
+                router.push(
+                  `/topics/${topic.attributes?.name
+                    ?.toLocaleLowerCase()
+                    .split(" ")
+                    .join("-")}-${topic.id}`
+                )
               }}
               className="space-y-4 mx-auto bg-gray-100 p-10 w-full rounded cursor-pointer"
             >

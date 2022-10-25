@@ -10,6 +10,7 @@ import {
   GET_CATEGORY_LIST,
   GET_CATEGORY_ROUTE,
   Get_CateoryCourse_List,
+  TOPIC_COURSE_LIST,
 } from "./category.gql"
 
 export const getCategoryList = async (): Promise<CategoryEntity[] | {}> => {
@@ -29,15 +30,24 @@ export const getCategoryRoute = async () => {
       (item: CategoryEntity) => {
         return {
           name: item.attributes?.name,
-          route: `/category/${item.id}`,
+          route: `/category/${item.attributes?.slug}-${item.id}`,
         }
       }
     )
-    console.log(filterCategory, "s")
+    console.log(
+      `/topics/${item.attributes?.name
+        ?.toLocaleLowerCase()
+        .split(" ")
+        .join("-")}-${item.id}`,
+      "s"
+    )
     return {
       id: item.id,
       name: item.attributes?.name,
-      route: `/topics/${item.id}`,
+      route: `/topics/${item.attributes?.name
+        ?.toLocaleLowerCase()
+        .split(" ")
+        .join("-")}-${item.id}`,
       submenu: filterCategory ?? [],
     }
   })
@@ -55,6 +65,16 @@ export const getCategoryCourseList = async ({
   })
 
   return result.categories?.data ?? []
+}
+
+export const getTopicCourseListDetail = async ({
+  id = "",
+}): Promise<Category | {}> => {
+  const result = await client.request<Query>(TOPIC_COURSE_LIST, {
+    topicId: id,
+  })
+
+  return result.courses?.data ?? {}
 }
 
 export const getCategoryCourseListDetail = async ({

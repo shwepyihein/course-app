@@ -5,12 +5,17 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper"
 import moment from "moment"
 import { IMAGE_PATH } from "../../utils"
+import { useRouter } from "next/router"
 
 interface FeatureSliderProps {
   list: any
 }
 
 export default function FeatureSlider({ list }: FeatureSliderProps) {
+  const router = useRouter()
+  const route = (id: any) => {
+    router.push(`/course/${id}`)
+  }
   return (
     <>
       <div className="pt-6 pb-12 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -24,7 +29,10 @@ export default function FeatureSlider({ list }: FeatureSliderProps) {
             return (
               <SwiperSlide
                 key={i}
-                className="w-full shadow-xl bg-white border py-2 rounded-lg "
+                onClick={() => {
+                  route(item.id)
+                }}
+                className="w-full cursor-pointer shadow-xl bg-white border py-2 rounded-lg "
               >
                 <div
                   v-for="card in cards"

@@ -5,11 +5,12 @@ import {
   Category,
   CategoryEntity,
   ChannelEntity,
+  CourseEntity,
 } from "../../../graphql/generated/gql_types"
 import qs from "query-string"
 import { useRouter } from "next/router"
 import { getCourseFilter } from "../../../api/course/course"
-import { classNames } from "../../../utils"
+import { classNames, IMAGE_PATH } from "../../../utils"
 import { getChannelList } from "../../../api/channel/channel"
 
 interface filterType {
@@ -17,6 +18,21 @@ interface filterType {
   category: string[]
   channel: string[]
   type: string
+}
+
+interface courseListType {
+  id: string
+  slug: string
+  categories: string
+  name: string
+  num_lessons: string
+  description: string
+  duration: string
+  publishAt: any
+  preivew_image: string
+  language: string
+  author: string
+  level: string
 }
 interface CourseFilterPage {
   categoryList: any
@@ -38,10 +54,9 @@ const CourseFilterPage = ({
     channel: [],
     type: "",
   })
-  const [courseList, setCourseList] = useState([])
+  const [view, setView] = useState(false)
+  const [courseList, setCourseList] = useState<courseListType[]>([])
   const router = useRouter()
-
-  const fetchCourses = (filterList: any) => {}
 
   const fitlerCategory = (id: any) => {
     let cate = filterList.category
@@ -152,21 +167,23 @@ const CourseFilterPage = ({
             <div className="md:flex justify-between items-center mb-8">
               <div>
                 <div className="text-xl font-semibold">
-                  {" "}
-                  Web Development Courses{" "}
+                  Web Development Courses
                 </div>
                 <div className="text-sm mt-2 font-medium text-gray-500 leading-6">
-                  {" "}
                   Choose from +10.000 courses with new additions published every
-                  months{" "}
+                  months
                 </div>
               </div>
 
               <div className="flex items-center justify-end">
                 <div className="bg-gray-100 border inline-flex p-0.5 rounded-md text-lg self-center">
-                  <a
-                    href="#"
-                    className="py-1.5 px-2.5 rounded-md bg-white shadow"
+                  <div
+                    onClick={() => {
+                      setView(true)
+                    }}
+                    className={`py-1.5 px-2.5 ${
+                      view ? "rounded-md bg-white shadow" : "cursor-pointer"
+                    }`}
                     data-tippy-placement="top"
                     data-tippy=""
                     data-original-title="List view"
@@ -183,10 +200,14 @@ const CourseFilterPage = ({
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                  </a>
-                  <a
-                    href="courses.html"
-                    className="py-1.5 px-2.5 rounded-md"
+                  </div>
+                  <div
+                    onClick={() => {
+                      setView(false)
+                    }}
+                    className={`py-1.5 px-2.5 rounded-md ${
+                      !view ? "rounded-md  bg-white shadow" : "cursor-pointer"
+                    }`}
                     data-tippy-placement="top"
                     data-tippy=""
                     data-original-title="Grid view"
@@ -199,7 +220,7 @@ const CourseFilterPage = ({
                     >
                       <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                     </svg>
-                  </a>
+                  </div>
                 </div>
                 <div className="w-40 lg:block hidden ml-3">
                   <div className="btn-group bootstrap-select is-small rounded-md shadow-sm">
@@ -234,67 +255,87 @@ const CourseFilterPage = ({
 
             <div className="tube-card mt-3 lg:mx-0 bg-white rounded-md -mx-5">
               <h4 className="py-3 px-5 border-b font-semibold text-grey-700">
-                Featured today
+                Courses
               </h4>
-              {courseList.map((item, i) => (
-                <div
-                  key={i}
-                  className="flex md:space-x-6 space-x-3 md:p-5 p-2 relative"
-                >
-                  <div className="md:w-60 md:h-36 w-28 h-20 overflow-hidden rounded-lg relative shadow-sm">
-                    {/* <img src="../assets/images/courses/img-5.jpg" alt="" className="w-full h-full absolute inset-0 object-cover"/> */}
-                  </div>
-                  <div className="flex- md:space-y-2 space-y-1">
-                    <p className="md:text-xl font-semibold line-clamp-2">
-                      {" "}
-                      Learn C sharp for Beginners Crash Course{" "}
-                    </p>
-                    <p className="leading-6 pr-4 line-clamp-2 md:block hidden">
-                      {" "}
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                      sed diam nonummy nibh euismod tincidunt ut magna .{" "}
-                    </p>
-                    <a href="#" className="md:font-semibold block text-sm">
-                      {" "}
-                      John Michael
-                    </a>
-                    <div className="flex items-center justify-between">
-                      <div className="flex space-x-2 items-center text-sm">
-                        <div> Binginner levels </div>
-                        <div className="md:block hidden">·</div>
-                        <div className="flex items-center"> 18 Hourse </div>
+              <div
+                className={
+                  !view
+                    ? "grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 p-3"
+                    : ""
+                }
+              >
+                {courseList.map((item: courseListType, i) =>
+                  view ? (
+                    <div
+                      key={i}
+                      className="flex md:space-x-6 space-x-3 md:p-5 p-2 relative"
+                    >
+                      <div className="md:w-60 md:h-36 w-28 h-20 overflow-hidden rounded-lg relative shadow-sm">
+                        <img
+                          src={IMAGE_PATH + item.preivew_image}
+                          alt=""
+                          className="w-full h-full absolute inset-0 object-cover"
+                        />
                       </div>
-                      <div className="md:flex items-center justify-center h-9 px-8 rounded-md border -mt-3.5 hidden">
-                        {" "}
-                        Enroll Now{" "}
+                      <div className="flex- md:space-y-2 space-y-1">
+                        <p className="md:text-xl font-semibold line-clamp-2">
+                          {item?.name}
+                        </p>
+                        <p className="leading-6 pr-4 line-clamp-2 md:block hidden">
+                          {item.description.slice(0, 120)}
+                        </p>
+                        <p className="md:font-semibold block text-sm">
+                          {item?.author}
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex space-x-2 items-center text-sm">
+                            <div> {item?.level} levels </div>
+                            <div className="md:block hidden">·</div>
+                            <div className="flex items-center">
+                              {item?.duration}
+                            </div>
+                          </div>
+                          <div
+                            onClick={() => {
+                              router.push(`/course/${item.id}`)
+                            }}
+                            className="cursor-pointer  md:flex items-center justify-center h-9 px-8 rounded-md border -mt-3.5 hidden"
+                          >
+                            Download Now
+                          </div>
+                        </div>
                       </div>
                     </div>
-
-                    {/* <div className="absolute top-1 right-3 md:flex hidden">
-                  <a
-                    href="#"
-                    className="hover:bg-gray-200 p-1.5 inline-block rounded-full"
-                    aria-expanded="true"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-                      ></path>
-                    </svg>
-                  </a>
-                </div> */}
-                  </div>
-                </div>
-              ))}
+                  ) : (
+                    <div className="bg-white shadow-sm rounded-lg uk-transition-toggle">
+                      <div className="w-full h-40 overflow-hidden rounded-t-lg relative">
+                        <img
+                          src={IMAGE_PATH + item.preivew_image}
+                          alt=""
+                          className="w-full h-full absolute inset-0 object-cover"
+                        />
+                        {/* <img src="../assets/images/icon-play.svg" className="w-12 h-12 uk-position-center uk-transition-fade" alt=""> */}
+                      </div>
+                      <div className="p-4">
+                        <div className="font-semibold line-clamp-2">
+                          {item.name}
+                        </div>
+                        <div className="flex space-x-2 items-center text-sm pt-3">
+                          <div> {item.name} </div>
+                          <div>·</div>
+                          <div> {item.num_lessons} lectures </div>
+                        </div>
+                        <div className="pt-1 flex items-center justify-between">
+                          <div className="text-sm font-semibold">
+                            {" "}
+                            {item.author}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
             </div>
           </div>
         </div>

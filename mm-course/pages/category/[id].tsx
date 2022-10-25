@@ -1,58 +1,65 @@
+import moment from "moment"
 import React from "react"
 import { getCategoryCourseListDetail } from "../../api/category/category"
 import Layout from "../../components/layout"
-import { Category } from "../../graphql/generated/gql_types"
+import NoDataComponent from "../../components/NoData"
+import { Category, CourseEntity } from "../../graphql/generated/gql_types"
+import { IMAGE_PATH } from "../../utils"
 
 interface CategoryPageProps {
-  categoryCourseList: Category
+  categoryCourseList: CourseEntity[]
+  slug: string
 }
 
-function CategoryPage({ categoryCourseList }: CategoryPageProps) {
-  console.log(categoryCourseList)
+function CategoryPage({ categoryCourseList, slug }: CategoryPageProps) {
+  console.log(categoryCourseList, "course")
   return (
     <Layout>
       <div className="bg-gray-100 py-12">
-        <div className="mx-auto min-h-[500px] max-w-7xl py-12 px-4 text-center sm:px-6">
+        <div className="mx-auto min-h-screen max-w-7xl py-12 px-4 text-center sm:px-6">
           <h4 className="text-2xl text-start pb-5 font-bold">
-            All Course about {categoryCourseList.name}
+            All Course in {slug.toUpperCase()}
           </h4>
+          {categoryCourseList.length === 0 && <NoDataComponent />}
           <div
             role="list"
             className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4"
           >
-            {[1, 2, 3, 4, 5].map((item) => {
-              return (
-                <div key={""}>
-                  <a
-                    href="blog-read.html"
-                    className="w-full md:h-32 h-28 overflow-hidden rounded-lg relative block"
-                  >
-                    <img
-                      src=""
-                      alt=""
-                      className="w-full h-full absolute inset-0 object-cover"
-                    />
-                  </a>
-                  <div className="pt-3 text-start">
+            {categoryCourseList.length !== 0 &&
+              categoryCourseList?.map((item: CourseEntity) => {
+                return (
+                  <div key={item.id}>
                     <a
                       href="blog-read.html"
-                      className="font-semibold line-clamp-2"
+                      className="w-full md:h-40 h-32 overflow-hidden rounded-lg relative block"
                     >
-                      Top Amazing web demos and experiments in 2021 Should Know
-                      About
+                      <img
+                        src={`${IMAGE_PATH}${item.attributes?.course_img?.data?.attributes?.url}`}
+                        alt=""
+                        className="w-full h-full absolute inset-0 object-cover"
+                      />
                     </a>
-                    <div className="pt-2">
-                      <p className="text-sm"> Denise Marie</p>
-                      <div className="flex space-x-2 items-center text-xs">
-                        <div> Feb 4, 2020 </div>
-                        <div className="md:block hidden">·</div>
-                        <div className="flex items-center"></div>
+                    <div className="pt-3 text-start">
+                      <a
+                        href="blog-read.html"
+                        className="font-semibold line-clamp-2"
+                      >
+                        {item.attributes?.name}
+                      </a>
+                      <div className="pt-2">
+                        <p className="text-sm"> {item.attributes?.name}</p>
+                        <div className="flex space-x-2 items-center text-xs">
+                          <div>
+                            {moment(item.attributes?.publishedAt).format(
+                              "MMM DD YYYY"
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
           </div>
         </div>
       </div>
@@ -63,10 +70,15 @@ function CategoryPage({ categoryCourseList }: CategoryPageProps) {
 export const getServerSideProps = async (context: any) => {
   const slug = context.params.id as string
   console.log(slug, "asd")
+  const data = slug.split("-")
+
   try {
-    const categoryCourseList = await getCategoryCourseListDetail({ id: slug })
+    const categoryCourseList = await getCategoryCourseListDetail({
+      id: data[data.length - 1],
+    })
     return {
       props: {
+        slug: data.slice(0, data.length - 1).join(" "),
         categoryCourseList,
       },
     }

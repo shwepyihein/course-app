@@ -10,6 +10,7 @@ import BookCard from "../../components/cards/bookcard"
 import { classNames, IMAGE_PATH } from "../../utils"
 import { getbooklistQuery, getBookRecommend } from "../../api/book/getBook"
 import { BookEntity } from "../../graphql/generated/gql_types"
+import { useRouter } from "next/router"
 
 const tabs = [
   { name: "Applied", href: "#", current: false },
@@ -25,7 +26,7 @@ interface BookPageProps {
 }
 
 const BookPage = (props: BookPageProps) => {
-  console.log(props)
+  const router = useRouter()
   return (
     <Layout>
       <div className="mx-auto min-h-screen mt-20 max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -127,6 +128,9 @@ const BookPage = (props: BookPageProps) => {
                   return (
                     <div
                       key={i}
+                      onClick={() => {
+                        router.push(`/book/${item.slug}`)
+                      }}
                       className="p-3 bg-white shadow rounded-md flex items-center space-x-3"
                     >
                       <img

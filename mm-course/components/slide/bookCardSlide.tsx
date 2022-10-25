@@ -42,7 +42,7 @@ export default function BookCardSlide({
         >
           {book.map((item: any, i: number) => {
             return (
-              <SwiperSlide key={i}>
+              <SwiperSlide key={i} className="max-w-[169.2px]">
                 <BookCard key={i} post={item} />
               </SwiperSlide>
             )

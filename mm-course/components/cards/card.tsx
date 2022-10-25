@@ -1,10 +1,15 @@
+import { useRouter } from "next/router"
 import React from "react"
 interface CardProps {
   post: any
 }
 function Card({ post }: CardProps) {
+  const router = useRouter()
+  const route = () => {
+    router.push(`/course/${post.id}`)
+  }
   return (
-    <div>
+    <div onClick={route} className="cursor-pointer">
       <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
         <div className="flex-shrink-0">
           <img
