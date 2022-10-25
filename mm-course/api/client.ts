@@ -8,7 +8,7 @@ const backend = publicRuntimeConfig.NEXT_PUBLIC_BACKEND
 
 const graphqlRoute = backend
   ? backend + "/graphql"
-  : "http://stg-api.hunterdox.com/graphql"
+  : "http://api.hunterdox.com/graphql"
 
 const client = new GraphQLClient(graphqlRoute)
 
