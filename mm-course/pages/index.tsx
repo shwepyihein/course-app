@@ -118,7 +118,10 @@ const HomePage = (props: HomePageProps) => {
               <div className="mt-2 grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 gap-2 -m-3">
                 {props.categoryList.map((item) => {
                   return (
-                    <Link key={item.id} href={`/category/${item.id}`}>
+                    <Link
+                      key={item.id}
+                      href={`/category/${item.attributes?.slug}-${item.id}`}
+                    >
                       <div className="hover:bg-gray-100 flex items-start px-3 py-2 rounded-lg space-x-3">
                         <div>
                           <h3 className="font-semibold text-lg">
