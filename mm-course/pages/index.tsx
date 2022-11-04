@@ -63,6 +63,21 @@ const HomePage = (props: HomePageProps) => {
   console.log(props.latestCourse)
   return (
     <Layout>
+      <Head>
+        <title>Online Course Platform |hunterdox</title>
+        <meta name="title" content="Online Course Platform" />
+        <meta
+          name="description"
+          content="Choose from online video courses with new additions published every month"
+        />
+        <meta
+          name="keywords"
+          content="tutorial, online courses, free, free courses, courses, programming, video, "
+        />
+        {/* <meta name="robots" content="index, follow" /> */}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="language" content="English" />
+      </Head>
       <main>
         <div className="bg-hero-pattern bg-cover bg-position-center ">
           <div className="mx-auto max-w-7xl py-60 px-4 text-center sm:px-6 lg:px-8 lg:py-80">
