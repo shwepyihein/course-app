@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "term_and_condtions",
+  "info": {
+    "singularName": "term-and-condtion",
+    "pluralName": "term-and-condtions",
+    "displayName": "Term&condtion"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    }
+  }
+}
