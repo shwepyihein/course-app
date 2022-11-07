@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 
 import { Navigation } from "swiper"
 import moment from "moment"
-import { IMAGE_PATH } from "../../utils"
+import { createMarkup, IMAGE_PATH } from "../../utils"
 import { useRouter } from "next/router"
 
 interface FeatureSliderProps {
@@ -13,8 +13,8 @@ interface FeatureSliderProps {
 
 export default function FeatureSlider({ list }: FeatureSliderProps) {
   const router = useRouter()
-  const route = (id: any) => {
-    router.push(`/course/${id}`)
+  const route = (item: any) => {
+    router.push(`/course/${item.slug}+${item.id}`)
   }
   return (
     <>
@@ -30,7 +30,7 @@ export default function FeatureSlider({ list }: FeatureSliderProps) {
               <SwiperSlide
                 key={i}
                 onClick={() => {
-                  route(item.id)
+                  route(item)
                 }}
                 className="w-full cursor-pointer shadow-xl bg-white border py-2 rounded-lg "
               >
@@ -50,7 +50,12 @@ export default function FeatureSlider({ list }: FeatureSliderProps) {
                     <h3 className="font-semibold text-lg leading-tight truncate">
                       {item.name}
                     </h3>
-                    <p className="mt-2">{item.description.slice(0, 250)}</p>
+                    <p
+                      className="mt-2"
+                      dangerouslySetInnerHTML={createMarkup(
+                        item.description.slice(0, 250)
+                      )}
+                    ></p>
                     <p className="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
                       {item.author} &bull;
                       {moment(item?.publishedAt).format("MM/DD/YYYY")}

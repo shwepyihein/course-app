@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://stg-api.hunterdox.com/graphql"
+schema: "https://api.hunterdox.com/graphql"
 generates:
   graphql/generated/gql_types.ts:
     plugins:

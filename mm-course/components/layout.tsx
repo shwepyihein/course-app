@@ -1,3 +1,4 @@
+import Link from "next/link"
 import React from "react"
 import Navbar from "./Navbar"
 
@@ -21,14 +22,16 @@ const Layout = ({ children }: LayoutProps) => {
         </span>
         <ul className="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6 ">
-              About
-            </a>
+            <Link href="/terms-condition">
+              <a className="mr-4 hover:underline md:mr-6 ">
+                Terms & Conditions
+              </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
-              Privacy Policy
-            </a>
+            <Link href="/pivacy-poicy">
+              <a className="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+            </Link>
           </li>
           <li>
             <a href="#" className="mr-4 hover:underline md:mr-6">

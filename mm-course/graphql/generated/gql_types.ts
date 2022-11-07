@@ -583,7 +583,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = Author | Blog | Book | Category | Channel | Course | I18NLocale | Topic | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Author | Blog | Book | Category | Channel | Course | I18NLocale | Policy | TermAndCondtion | Topic | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -716,6 +716,8 @@ export type Mutation = {
   deleteCategory?: Maybe<CategoryEntityResponse>;
   deleteChannel?: Maybe<ChannelEntityResponse>;
   deleteCourse?: Maybe<CourseEntityResponse>;
+  deletePolicy?: Maybe<PolicyEntityResponse>;
+  deleteTermAndCondtion?: Maybe<TermAndCondtionEntityResponse>;
   deleteTopic?: Maybe<TopicEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -741,6 +743,8 @@ export type Mutation = {
   updateChannel?: Maybe<ChannelEntityResponse>;
   updateCourse?: Maybe<CourseEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
+  updatePolicy?: Maybe<PolicyEntityResponse>;
+  updateTermAndCondtion?: Maybe<TermAndCondtionEntityResponse>;
   updateTopic?: Maybe<TopicEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -951,6 +955,16 @@ export type MutationUpdateFileInfoArgs = {
 };
 
 
+export type MutationUpdatePolicyArgs = {
+  data: PolicyInput;
+};
+
+
+export type MutationUpdateTermAndCondtionArgs = {
+  data: TermAndCondtionInput;
+};
+
+
 export type MutationUpdateTopicArgs = {
   data: TopicInput;
   id: Scalars['ID'];
@@ -1004,6 +1018,32 @@ export type PaginationArg = {
   start?: InputMaybe<Scalars['Int']>;
 };
 
+export type Policy = {
+  __typename?: 'Policy';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type PolicyEntity = {
+  __typename?: 'PolicyEntity';
+  attributes?: Maybe<Policy>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type PolicyEntityResponse = {
+  __typename?: 'PolicyEntityResponse';
+  data?: Maybe<PolicyEntity>;
+};
+
+export type PolicyInput = {
+  description?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
 export enum PublicationState {
   Live = 'LIVE',
   Preview = 'PREVIEW'
@@ -1026,6 +1066,8 @@ export type Query = {
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  policy?: Maybe<PolicyEntityResponse>;
+  termAndCondtion?: Maybe<TermAndCondtionEntityResponse>;
   topic?: Maybe<TopicEntityResponse>;
   topics?: Maybe<TopicEntityResponseCollection>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
@@ -1129,6 +1171,16 @@ export type QueryI18NLocalesArgs = {
 };
 
 
+export type QueryPolicyArgs = {
+  publicationState?: InputMaybe<PublicationState>;
+};
+
+
+export type QueryTermAndCondtionArgs = {
+  publicationState?: InputMaybe<PublicationState>;
+};
+
+
 export type QueryTopicArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
@@ -1216,6 +1268,32 @@ export type StringFilterInput = {
   null?: InputMaybe<Scalars['Boolean']>;
   or?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type TermAndCondtion = {
+  __typename?: 'TermAndCondtion';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type TermAndCondtionEntity = {
+  __typename?: 'TermAndCondtionEntity';
+  attributes?: Maybe<TermAndCondtion>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type TermAndCondtionEntityResponse = {
+  __typename?: 'TermAndCondtionEntityResponse';
+  data?: Maybe<TermAndCondtionEntity>;
+};
+
+export type TermAndCondtionInput = {
+  description?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type Topic = {

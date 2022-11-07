@@ -7,7 +7,7 @@ import {
 } from "../../api/blog/getblog"
 import Layout from "../../components/layout"
 import { Blog } from "../../graphql/generated/gql_types"
-import { classNames, IMAGE_PATH } from "../../utils"
+import { classNames, createMarkup, IMAGE_PATH } from "../../utils"
 const tabs = [
   { name: "Suggestions", href: "#", current: false },
   { name: "Mobile", href: "#", current: false },
@@ -96,9 +96,12 @@ const BlogList = (props: BlogListProps) => {
                         <div className="text-lg font-semibold line-clamp-2 leading-8">
                           {item.title}
                         </div>
-                        <p className="line-clamp-2">
-                          {item.short_description.slice(0, 150)}
-                        </p>
+                        <div
+                          className="line-clamp-2"
+                          dangerouslySetInnerHTML={createMarkup(
+                            item.short_description.slice(0, 150)
+                          )}
+                        />
 
                         {/* <div className="flex items-center pt-2 text-sm">
                           <div className="flex items-center"> 12 </div>

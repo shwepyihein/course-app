@@ -10,7 +10,7 @@ import {
 import qs from "query-string"
 import { useRouter } from "next/router"
 import { getCourseFilter } from "../../../api/course/course"
-import { classNames, IMAGE_PATH } from "../../../utils"
+import { classNames, createMarkup, IMAGE_PATH } from "../../../utils"
 import { getChannelList } from "../../../api/channel/channel"
 
 interface filterType {
@@ -281,9 +281,12 @@ const CourseFilterPage = ({
                         <p className="md:text-xl font-semibold line-clamp-2">
                           {item?.name}
                         </p>
-                        <p className="leading-6 pr-4 line-clamp-2 md:block hidden">
-                          {item.description.slice(0, 120)}
-                        </p>
+                        <p
+                          dangerouslySetInnerHTML={createMarkup(
+                            item.description.slice(0, 120)
+                          )}
+                          className="leading-6 pr-4 line-clamp-2 md:block hidden"
+                        ></p>
                         <p className="md:font-semibold block text-sm">
                           {item?.author}
                         </p>
@@ -297,7 +300,7 @@ const CourseFilterPage = ({
                           </div>
                           <div
                             onClick={() => {
-                              router.push(`/course/${item.id}`)
+                              router.push(`/course/${item.slug}+${item.id}`)
                             }}
                             className="cursor-pointer  md:flex items-center justify-center h-9 px-8 rounded-md border -mt-3.5 hidden"
                           >
@@ -307,7 +310,12 @@ const CourseFilterPage = ({
                       </div>
                     </div>
                   ) : (
-                    <div className="bg-white shadow-sm rounded-lg uk-transition-toggle">
+                    <div
+                      className="bg-white cursor-pointer shadow-sm rounded-lg uk-transition-toggle"
+                      onClick={() => {
+                        router.push(`/course/${item.slug}+${item.id}`)
+                      }}
+                    >
                       <div className="w-full h-40 overflow-hidden rounded-t-lg relative">
                         <img
                           src={IMAGE_PATH + item.preivew_image}

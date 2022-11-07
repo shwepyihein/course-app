@@ -5,7 +5,7 @@ import { getBookDetail, getBookLatest } from "../../api/book/getBook"
 import Layout from "../../components/layout"
 import BookCardSlide from "../../components/slide/bookCardSlide"
 import { Book, BookEntity } from "../../graphql/generated/gql_types"
-import { IMAGE_PATH } from "../../utils"
+import { createMarkup, IMAGE_PATH } from "../../utils"
 
 interface BookDetailProps {
   bookData: Book
@@ -99,7 +99,9 @@ const BookDetail = ({ bookData, LatestBook }: BookDetailProps) => {
               <hr className="mb-5" />
               <h4 className="font-semibold mb-2 text-base"> Description </h4>
               <div className="space-y-2">
-                <div>{bookData.description}</div>
+                <div
+                  dangerouslySetInnerHTML={createMarkup(bookData.description)}
+                />
                 <h4>Book Information</h4>
                 <p className="mb-0">
                   <strong>Page Count</strong>: {bookData.page_count}

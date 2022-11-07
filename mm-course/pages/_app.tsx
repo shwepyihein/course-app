@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           title: "Hunter",
           type: "website",
           locale: "utf-8",
-          url: "hunterdox.com",
+          url: "https://hunterdox.com",
           description:
             "Choose from online video courses with new additions published every month",
           site_name: "HunterDox | Hunter Dox | online video courses platform",

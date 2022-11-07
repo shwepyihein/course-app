@@ -7,3 +7,7 @@ export function classNames(...classes: string[]) {
 }
 
 export const IMAGE_PATH = process.env.IMAGE_PATH
+
+export const createMarkup = (description: any) => {
+  if (description) return { __html: description }
+}

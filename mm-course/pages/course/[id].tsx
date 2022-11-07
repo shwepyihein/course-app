@@ -1,5 +1,6 @@
 import moment from "moment"
 import { GetServerSideProps } from "next"
+import { NextSeo } from "next-seo"
 import { useRouter } from "next/router"
 import React from "react"
 import { getBookDetail, getBookLatest } from "../../api/book/getBook"
@@ -11,14 +12,16 @@ import {
   BookEntity,
   CourseEntity,
 } from "../../graphql/generated/gql_types"
-import { IMAGE_PATH } from "../../utils"
+import { createMarkup, IMAGE_PATH } from "../../utils"
 
 interface BookDetailProps {
   CourseData: CourseEntity
+  title: string
+  desc: string
   // LatestBook: BookEntity[]
 }
 
-const BookDetail = ({ CourseData }: BookDetailProps) => {
+const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
   const router = useRouter()
   const downloadBook = (v: any) => {
     let link = document.createElement("a")
@@ -30,8 +33,31 @@ const BookDetail = ({ CourseData }: BookDetailProps) => {
     // Clean up and remove the link
     // link?.parentNode.removeChild(link)
   }
+
   return (
     <Layout>
+      <NextSeo
+        title={title}
+        description={desc}
+        canonical=""
+        openGraph={{
+          title: "Hunter dox",
+          type: "website",
+          locale: "utf-8",
+          url: "https://hunterdox.com",
+          description: desc,
+          site_name: `HunterDox | Hunter Dox | ${title}`,
+          images: [
+            {
+              url: "CourseData?.attributes?.course_img?.data?.attributes?.url",
+              width: 800,
+              height: 600,
+              alt: "Og Image Alt",
+              type: "image/jpeg",
+            },
+          ],
+        }}
+      ></NextSeo>
       <div className="max-w-5xl mt-20 min-h-screen mb-0 md:p-5 mx-auto">
         <div className="lg:flex lg:space-x-10 bg-white rounded-md shadow max-w-3x  mx-auto md:p-8 p-3">
           <div className="lg:w-1/3 w-full">
@@ -107,7 +133,12 @@ const BookDetail = ({ CourseData }: BookDetailProps) => {
               <hr className="mb-5" />
               <h4 className="font-semibold mb-2 text-base"> Description </h4>
               <div className="space-y-2">
-                <div>{CourseData?.attributes?.description}</div>
+                <div
+                  dangerouslySetInnerHTML={createMarkup(
+                    CourseData?.attributes?.description
+                  )}
+                />
+
                 <h4>Book Information</h4>
                 <p className="mb-0">
                   <strong>Level:</strong>
@@ -142,19 +173,19 @@ const BookDetail = ({ CourseData }: BookDetailProps) => {
 export const getServerSideProps = async (context: any) => {
   const slug = context.params.id as string
 
+  console.log(slug)
+  const id = slug?.split("+")[1]
+
   try {
     const CourseData = await getCourseDetail({
-      slug: slug,
+      slug: id,
     })
-    // const LatestBook = await getBookLatest({
-    //   limit: 10,
-    //   start: 0,
-    // })
 
     return {
       props: {
         CourseData,
-        // LatestBook,
+        title: CourseData?.attributes?.name ?? "",
+        desc: CourseData?.attributes?.description ?? "",
       },
     }
   } catch (e) {
