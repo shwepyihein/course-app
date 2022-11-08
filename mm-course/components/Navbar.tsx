@@ -13,12 +13,13 @@ import { useRouter } from "next/router"
 import CategoryDropdown from "./categoryDropDown"
 import MenuItems from "./categoryDropDown/MenuItem"
 import { getCategoryRoute } from "../api/category/category"
+import Link from "next/link"
 
 const navigation = [
   { name: "Categories", route: "/category", current: false },
   {
     name: "Courses",
-    href: "/course",
+    href: "/course-type/free",
     current: true,
     menu: true,
     submenu: [
@@ -199,7 +200,7 @@ export default function Navbar() {
                 <Disclosure.Button
                   key={item.name}
                   as="a"
-                  href={item.href}
+                  href={item.route}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"

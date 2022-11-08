@@ -35,14 +35,14 @@ export default function BookCardSlide({
       <div className="pt-6 pb-12 mx-auto max-w-7xl">
         <Swiper
           slidesPerView={cardCount}
-          spaceBetween={5}
+          spaceBetween={10}
           navigation={true}
           modules={[Navigation]}
-          className="mySwiper  bg-white py-2"
+          className="mySwiper  bg-[#F9FAFB] py-2"
         >
           {book.map((item: any, i: number) => {
             return (
-              <SwiperSlide key={i} className="max-w-[169.2px]">
+              <SwiperSlide key={i} className="max-w-[169.2px] min-w-[169.2px]">
                 <BookCard key={i} post={item} />
               </SwiperSlide>
             )

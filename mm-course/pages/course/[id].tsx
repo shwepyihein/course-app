@@ -34,22 +34,25 @@ const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
     // link?.parentNode.removeChild(link)
   }
 
+  console.log(router)
+
   return (
     <Layout>
       <NextSeo
         title={title}
         description={desc}
-        canonical=""
+        canonical={`https://hunterdox.com/${router.asPath}`}
         openGraph={{
-          title: "Hunter dox",
+          title: title,
           type: "website",
           locale: "utf-8",
-          url: "https://hunterdox.com",
+          url: `https://hunterdox.com/${router.asPath}`,
           description: desc,
-          site_name: `HunterDox | Hunter Dox | ${title}`,
+          site_name: `${title}`,
           images: [
             {
-              url: "CourseData?.attributes?.course_img?.data?.attributes?.url",
+              url:
+                CourseData?.attributes?.course_img?.data?.attributes?.url ?? "",
               width: 800,
               height: 600,
               alt: "Og Image Alt",

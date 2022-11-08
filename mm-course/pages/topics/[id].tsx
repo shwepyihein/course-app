@@ -1,4 +1,5 @@
 import moment from "moment"
+import { useRouter } from "next/router"
 import React from "react"
 import { getTopicCourseListDetail } from "../../api/category/category"
 import Layout from "../../components/layout"
@@ -12,6 +13,7 @@ interface CategoryPageProps {
 }
 
 function CategoryPage({ slug, TopicCourseList }: CategoryPageProps) {
+  const router = useRouter()
   return (
     <Layout>
       <div className="bg-gray-100 py-12">
@@ -27,7 +29,12 @@ function CategoryPage({ slug, TopicCourseList }: CategoryPageProps) {
             {TopicCourseList.length !== 0 &&
               TopicCourseList.map((item) => {
                 return (
-                  <div key={item.id}>
+                  <div
+                    key={item.id}
+                    onClick={() => {
+                      router.push(`/course/${item.attributes?.slug}+${item.id}`)
+                    }}
+                  >
                     <div className="w-full md:h-40 h-32 overflow-hidden rounded-lg relative block">
                       <img
                         src={`${IMAGE_PATH}${item.attributes?.course_img?.data?.attributes?.url}`}

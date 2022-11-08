@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next"
+import { NextSeo } from "next-seo"
 import { useRouter } from "next/router"
 import React from "react"
 import { getBookDetail, getBookLatest } from "../../api/book/getBook"
@@ -10,9 +11,11 @@ import { createMarkup, IMAGE_PATH } from "../../utils"
 interface BookDetailProps {
   bookData: Book
   LatestBook: BookEntity[]
+  title: string
+  desc: string
 }
 
-const BookDetail = ({ bookData, LatestBook }: BookDetailProps) => {
+const BookDetail = ({ bookData, LatestBook, title, desc }: BookDetailProps) => {
   const router = useRouter()
   const downloadBook = (v: any) => {
     let link = document.createElement("a")
@@ -26,6 +29,28 @@ const BookDetail = ({ bookData, LatestBook }: BookDetailProps) => {
   }
   return (
     <Layout>
+      <NextSeo
+        title={title}
+        description={desc}
+        canonical={`https://hunterdox.com/${router.asPath}`}
+        openGraph={{
+          title: title,
+          type: "website",
+          locale: "utf-8",
+          url: `https://hunterdox.com/${router.asPath}`,
+          description: desc,
+          site_name: `${title}`,
+          images: [
+            {
+              url: bookData?.book_img?.data?.attributes?.url ?? "",
+              width: 800,
+              height: 600,
+              alt: "Og Image Alt",
+              type: "image/jpeg",
+            },
+          ],
+        }}
+      ></NextSeo>
       <div className="max-w-5xl mt-20 mb-0 md:p-5 mx-auto">
         <div className="lg:flex lg:space-x-10 bg-white rounded-md shadow max-w-3x  mx-auto md:p-8 p-3">
           <div className="lg:w-1/3 w-full">
@@ -143,6 +168,8 @@ export const getServerSideProps = async (context: any) => {
       props: {
         bookData,
         LatestBook,
+        title: bookData.name ?? "",
+        desc: bookData.description ?? "",
       },
     }
   } catch (e) {

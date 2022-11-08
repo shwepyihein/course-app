@@ -13,9 +13,7 @@ interface FeatureSliderProps {
 
 export default function FeatureSlider({ list }: FeatureSliderProps) {
   const router = useRouter()
-  const route = (item: any) => {
-    router.push(`/course/${item.slug}+${item.id}`)
-  }
+  // const route = (item: any) => {}
   return (
     <>
       <div className="pt-6 pb-12 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -30,9 +28,9 @@ export default function FeatureSlider({ list }: FeatureSliderProps) {
               <SwiperSlide
                 key={i}
                 onClick={() => {
-                  route(item)
+                  router.push(`/course/${item.slug}+${item.id}`)
                 }}
-                className="w-full cursor-pointer shadow-xl bg-white border py-2 rounded-lg "
+                className="w-full cursor-pointer shadow-xl bg-white border py-2 px-2 rounded-lg "
               >
                 <div
                   v-for="card in cards"
@@ -50,12 +48,12 @@ export default function FeatureSlider({ list }: FeatureSliderProps) {
                     <h3 className="font-semibold text-lg leading-tight truncate">
                       {item.name}
                     </h3>
-                    <p
+                    <div
                       className="mt-2"
                       dangerouslySetInnerHTML={createMarkup(
                         item.description.slice(0, 250)
                       )}
-                    ></p>
+                    />
                     <p className="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
                       {item.author} &bull;
                       {moment(item?.publishedAt).format("MM/DD/YYYY")}

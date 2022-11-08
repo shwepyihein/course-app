@@ -30,11 +30,11 @@ const MenuItems = ({ items, depthLevel }: MenuItemsProps) => {
   }, [dropdown])
 
   const onMouseEnter = () => {
-    window.innerWidth > 960 && setDropdown(true)
+    setDropdown(true)
   }
 
   const onMouseLeave = () => {
-    window.innerWidth > 960 && setDropdown(false)
+    setDropdown(false)
   }
 
   return (
