@@ -6,7 +6,7 @@ import { getBookDetail, getBookLatest } from "../../api/book/getBook"
 import Layout from "../../components/layout"
 import BookCardSlide from "../../components/slide/bookCardSlide"
 import { Book, BookEntity } from "../../graphql/generated/gql_types"
-import { createMarkup, IMAGE_PATH } from "../../utils"
+import { createMarkup, IMAGE_PATH, removeTags } from "../../utils"
 
 interface BookDetailProps {
   bookData: Book
@@ -32,17 +32,19 @@ const BookDetail = ({ bookData, LatestBook, title, desc }: BookDetailProps) => {
       <NextSeo
         title={title}
         description={desc}
-        canonical={`https://hunterdox.com/${router.asPath}`}
+        canonical={`https://hunterdox.com${router.asPath}`}
         openGraph={{
           title: title,
           type: "website",
           locale: "utf-8",
-          url: `https://hunterdox.com/${router.asPath}`,
+          url: `https://hunterdox.com${router.asPath}`,
           description: desc,
           site_name: `${title}`,
           images: [
             {
-              url: bookData?.book_img?.data?.attributes?.url ?? "",
+              url:
+                `${IMAGE_PATH}${bookData?.book_img?.data?.attributes?.url}` ??
+                "",
               width: 800,
               height: 600,
               alt: "Og Image Alt",
@@ -169,7 +171,7 @@ export const getServerSideProps = async (context: any) => {
         bookData,
         LatestBook,
         title: bookData.name ?? "",
-        desc: bookData.description ?? "",
+        desc: removeTags(bookData.description) ?? "",
       },
     }
   } catch (e) {

@@ -12,7 +12,7 @@ import {
   BookEntity,
   CourseEntity,
 } from "../../graphql/generated/gql_types"
-import { createMarkup, IMAGE_PATH } from "../../utils"
+import { createMarkup, IMAGE_PATH, removeTags } from "../../utils"
 
 interface BookDetailProps {
   CourseData: CourseEntity
@@ -41,18 +41,19 @@ const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
       <NextSeo
         title={title}
         description={desc}
-        canonical={`https://hunterdox.com/${router.asPath}`}
+        canonical={`https://hunterdox.com${router.asPath}`}
         openGraph={{
           title: title,
           type: "website",
           locale: "utf-8",
-          url: `https://hunterdox.com/${router.asPath}`,
+          url: `https://hunterdox.com${router.asPath}`,
           description: desc,
           site_name: `${title}`,
           images: [
             {
               url:
-                CourseData?.attributes?.course_img?.data?.attributes?.url ?? "",
+                `${IMAGE_PATH}${CourseData?.attributes?.course_img?.data?.attributes?.url}` ??
+                "",
               width: 800,
               height: 600,
               alt: "Og Image Alt",
@@ -188,7 +189,7 @@ export const getServerSideProps = async (context: any) => {
       props: {
         CourseData,
         title: CourseData?.attributes?.name ?? "",
-        desc: CourseData?.attributes?.description ?? "",
+        desc: removeTags(CourseData?.attributes?.description) ?? "",
       },
     }
   } catch (e) {
