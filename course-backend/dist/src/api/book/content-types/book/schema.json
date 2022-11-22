@@ -63,6 +63,9 @@
             "type": "uid",
             "targetField": "name",
             "required": true
+        },
+        "description_mm": {
+            "type": "richtext"
         }
     }
 }

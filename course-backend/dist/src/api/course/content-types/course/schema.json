@@ -91,6 +91,9 @@
         },
         "is_recommend": {
             "type": "boolean"
+        },
+        "description_mm": {
+            "type": "richtext"
         }
     }
 }
