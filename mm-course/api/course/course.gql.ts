@@ -24,6 +24,7 @@ export const GET_COURSE_LIST_FILTER = gql`
         attributes {
           name
           description
+          description_mm
           duration
           slug
           language
@@ -68,6 +69,7 @@ export const GET_LATEST_COURSE = gql`
         attributes {
           name
           description
+          description_mm
           duration
           slug
           language
@@ -109,6 +111,7 @@ export const FETCH_COURSE_DETAIL = gql`
         attributes {
           name
           description
+          description_mm
           duration
           slug
           language

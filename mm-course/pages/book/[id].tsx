@@ -127,7 +127,11 @@ const BookDetail = ({ bookData, LatestBook, title, desc }: BookDetailProps) => {
               <h4 className="font-semibold mb-2 text-base"> Description </h4>
               <div className="space-y-2">
                 <div
-                  dangerouslySetInnerHTML={createMarkup(bookData.description)}
+                  dangerouslySetInnerHTML={createMarkup(
+                    router.locale === "mm"
+                      ? bookData.description_mm ?? ""
+                      : bookData.description
+                  )}
                 />
                 <h4>Book Information</h4>
                 <p className="mb-0">
@@ -157,7 +161,7 @@ const BookDetail = ({ bookData, LatestBook, title, desc }: BookDetailProps) => {
 
 export const getServerSideProps = async (context: any) => {
   const slug = context.params.id as string
-
+  const local = context.locale
   try {
     const bookData = await getBookDetail({
       slug: slug,
@@ -171,7 +175,10 @@ export const getServerSideProps = async (context: any) => {
         bookData,
         LatestBook,
         title: bookData.name ?? "",
-        desc: removeTags(bookData.description) ?? "",
+        desc:
+          removeTags(
+            local == "mm" ? bookData.description_mm ?? "" : bookData.description
+          ) ?? "",
       },
     }
   } catch (e) {

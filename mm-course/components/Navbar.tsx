@@ -117,7 +117,27 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute inset-y-0 right-0 flex gap-3 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <ul className="text-gray-500 flex gap-2 ">
+                  {router.locales?.map((item) => {
+                    return (
+                      <li key={item}>
+                        <Link href={router.asPath} locale={item}>
+                          <a
+                            className={classNames(
+                              router.locale === item
+                                ? "text-white"
+                                : "text-gray-500 ",
+                              item === "mm" ? "border-l px-1" : ""
+                            )}
+                          >
+                            {item === "mm" ? "MM" : "EN"}
+                          </a>
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
                 <button
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"

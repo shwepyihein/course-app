@@ -34,8 +34,6 @@ const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
     // link?.parentNode.removeChild(link)
   }
 
-  console.log(router)
-
   return (
     <Layout>
       <NextSeo
@@ -139,7 +137,11 @@ const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
               <div className="space-y-2">
                 <div
                   dangerouslySetInnerHTML={createMarkup(
-                    CourseData?.attributes?.description
+                    router.locale === "mm"
+                      ? CourseData.attributes?.description_mm
+                        ? CourseData.attributes?.description_mm
+                        : ""
+                      : CourseData?.attributes?.description
                   )}
                 />
 
@@ -175,6 +177,7 @@ const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
 }
 
 export const getServerSideProps = async (context: any) => {
+  const local = context.locale
   const slug = context.params.id as string
 
   console.log(slug)
@@ -189,7 +192,12 @@ export const getServerSideProps = async (context: any) => {
       props: {
         CourseData,
         title: CourseData?.attributes?.name ?? "",
-        desc: removeTags(CourseData?.attributes?.description) ?? "",
+        desc:
+          removeTags(
+            local === "mm"
+              ? CourseData?.attributes?.description_mm
+              : CourseData?.attributes?.description
+          ) ?? "",
       },
     }
   } catch (e) {

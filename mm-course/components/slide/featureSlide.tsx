@@ -51,7 +51,9 @@ export default function FeatureSlider({ list }: FeatureSliderProps) {
                     <div
                       className="mt-2"
                       dangerouslySetInnerHTML={createMarkup(
-                        item.description.slice(0, 250)
+                        router.locale === "mm"
+                          ? item.description_mm.slice(0, 120)
+                          : item.description.slice(0, 120)
                       )}
                     />
                     <p className="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">

@@ -171,6 +171,7 @@ export type Book = {
   channel?: Maybe<ChannelEntityResponse>;
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
+  description_mm?: Maybe<Scalars['String']>;
   download_link?: Maybe<Scalars['String']>;
   is_recommend?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
@@ -213,6 +214,7 @@ export type BookFiltersInput = {
   channel?: InputMaybe<ChannelFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
+  description_mm?: InputMaybe<StringFilterInput>;
   download_link?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   is_recommend?: InputMaybe<BooleanFilterInput>;
@@ -232,6 +234,7 @@ export type BookInput = {
   categories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   channel?: InputMaybe<Scalars['ID']>;
   description?: InputMaybe<Scalars['String']>;
+  description_mm?: InputMaybe<Scalars['String']>;
   download_link?: InputMaybe<Scalars['String']>;
   is_recommend?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
@@ -429,6 +432,7 @@ export type Course = {
   course_material_links?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
+  description_mm?: Maybe<Scalars['String']>;
   download_link?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['String']>;
   is_recommend?: Maybe<Scalars['Boolean']>;
@@ -476,6 +480,7 @@ export type CourseFiltersInput = {
   course_material_links?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
+  description_mm?: InputMaybe<StringFilterInput>;
   download_link?: InputMaybe<StringFilterInput>;
   duration?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
@@ -500,6 +505,7 @@ export type CourseInput = {
   course_img?: InputMaybe<Scalars['ID']>;
   course_material_links?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
+  description_mm?: InputMaybe<Scalars['String']>;
   download_link?: InputMaybe<Scalars['String']>;
   duration?: InputMaybe<Scalars['String']>;
   is_recommend?: InputMaybe<Scalars['Boolean']>;

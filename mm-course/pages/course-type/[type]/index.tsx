@@ -27,6 +27,7 @@ interface courseListType {
   name: string
   num_lessons: string
   description: string
+  description_mm: string
   duration: string
   publishAt: any
   preivew_image: string
@@ -283,7 +284,11 @@ const CourseFilterPage = ({
                         </p>
                         <p
                           dangerouslySetInnerHTML={createMarkup(
-                            item.description.slice(0, 120)
+                            router.locale === "mm"
+                              ? item.description_mm
+                                ? item.description_mm.slice(0, 120)
+                                : ""
+                              : item.description.slice(0, 120)
                           )}
                           className="leading-6 pr-4 line-clamp-2 md:block hidden"
                         ></p>

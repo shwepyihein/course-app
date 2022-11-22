@@ -61,6 +61,7 @@ export const GET_BOOK_FILTER = gql`
           title
           slug
           description
+          description_mm
           publishedAt
           short_description
           author {
@@ -174,6 +175,7 @@ export const FETCH_BOOK_DETAIL = gql`
           name
           slug
           description
+          description_mm
           word_count
           page_count
           download_link
