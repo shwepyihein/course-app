@@ -118,7 +118,7 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex gap-3 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <ul className="text-gray-500 flex gap-2 ">
+                {/* <ul className="text-gray-500 flex gap-2 ">
                   {router.locales?.map((item) => {
                     return (
                       <li key={item}>
@@ -137,7 +137,7 @@ export default function Navbar() {
                       </li>
                     )
                   })}
-                </ul>
+                </ul> */}
                 <Link
                   href={"https://forms.gle/cz6WJM2aSnd8J4Po6"}
                   target="_blank"
@@ -153,7 +153,7 @@ export default function Navbar() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-                g{/* Profile dropdown */}
+                {/* Profile dropdown */}
                 {/* <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">

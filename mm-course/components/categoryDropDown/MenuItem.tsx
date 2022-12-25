@@ -39,7 +39,7 @@ const MenuItems = ({ items, depthLevel }: MenuItemsProps) => {
 
   return (
     <li
-      className="inline-flex text-gray-500 flex w-full justify-between menu-items"
+      className="text-gray-500 flex w-full justify-between menu-items"
       ref={ref}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

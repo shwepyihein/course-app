@@ -95,7 +95,7 @@ const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
                           CourseData.attributes?.course_material_links
                         )
                       }}
-                      className="hover:text-gray-800 bg-gray-300 font-semibold inline-flex items-center justify-center py-2 rounded-md text-center w-full"
+                      className="cursor-pointer hover:text-gray-800 bg-gray-300 font-semibold inline-flex items-center justify-center py-2 rounded-md text-center w-full"
                     >
                       {" "}
                       <i className="uil-book-open mr-1 md:block hidden"></i>{" "}
@@ -107,7 +107,7 @@ const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
                       onClick={() => {
                         downloadBook(CourseData.attributes?.download_link)
                       }}
-                      className="hover:text-white-800 text-white bg-gray-600 font-semibold inline-flex items-center justify-center py-2 rounded-md text-center w-full"
+                      className="cursor-pointer  hover:text-white-800 text-white bg-gray-600 font-semibold inline-flex items-center justify-center py-2 rounded-md text-center w-full"
                     >
                       {" "}
                       <i className="uil-book-open mr-1 md:block hidden"></i>{" "}
@@ -136,6 +136,7 @@ const BookDetail = ({ CourseData, title, desc }: BookDetailProps) => {
               <h4 className="font-semibold mb-2 text-base"> Description </h4>
               <div className="space-y-2">
                 <div
+                  className="truncate"
                   dangerouslySetInnerHTML={createMarkup(
                     router.locale === "mm"
                       ? CourseData.attributes?.description_mm
