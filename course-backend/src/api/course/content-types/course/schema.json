@@ -94,6 +94,12 @@
     },
     "description_mm": {
       "type": "richtext"
+    },
+    "download": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::download.download",
+      "inversedBy": "courses"
     }
   }
 }
