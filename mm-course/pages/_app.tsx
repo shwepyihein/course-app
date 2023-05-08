@@ -2,6 +2,7 @@ import "../styles/globals.css"
 import type { AppProps } from "next/app"
 import Head from "next/head"
 import { DefaultSeo } from "next-seo"
+import { AuthProvider } from "../context/authContext"
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -33,7 +34,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff"></meta>
       </Head>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
 
       <DefaultSeo titleTemplate="%s |  HunterDox" />
     </>

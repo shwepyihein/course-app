@@ -10,6 +10,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
   DateTime: any;
   JSON: any;
   Upload: any;
@@ -433,6 +434,7 @@ export type Course = {
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   description_mm?: Maybe<Scalars['String']>;
+  download?: Maybe<DownloadEntityResponse>;
   download_link?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['String']>;
   is_recommend?: Maybe<Scalars['Boolean']>;
@@ -481,6 +483,7 @@ export type CourseFiltersInput = {
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
   description_mm?: InputMaybe<StringFilterInput>;
+  download?: InputMaybe<DownloadFiltersInput>;
   download_link?: InputMaybe<StringFilterInput>;
   duration?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
@@ -506,6 +509,7 @@ export type CourseInput = {
   course_material_links?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   description_mm?: InputMaybe<Scalars['String']>;
+  download?: InputMaybe<Scalars['ID']>;
   download_link?: InputMaybe<Scalars['String']>;
   duration?: InputMaybe<Scalars['String']>;
   is_recommend?: InputMaybe<Scalars['Boolean']>;
@@ -522,6 +526,30 @@ export type CourseInput = {
 export type CourseRelationResponseCollection = {
   __typename?: 'CourseRelationResponseCollection';
   data: Array<CourseEntity>;
+};
+
+export type DateFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  contains?: InputMaybe<Scalars['Date']>;
+  containsi?: InputMaybe<Scalars['Date']>;
+  endsWith?: InputMaybe<Scalars['Date']>;
+  eq?: InputMaybe<Scalars['Date']>;
+  eqi?: InputMaybe<Scalars['Date']>;
+  gt?: InputMaybe<Scalars['Date']>;
+  gte?: InputMaybe<Scalars['Date']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  lt?: InputMaybe<Scalars['Date']>;
+  lte?: InputMaybe<Scalars['Date']>;
+  ne?: InputMaybe<Scalars['Date']>;
+  not?: InputMaybe<DateFilterInput>;
+  notContains?: InputMaybe<Scalars['Date']>;
+  notContainsi?: InputMaybe<Scalars['Date']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  startsWith?: InputMaybe<Scalars['Date']>;
 };
 
 export type DateTimeFilterInput = {
@@ -546,6 +574,68 @@ export type DateTimeFilterInput = {
   null?: InputMaybe<Scalars['Boolean']>;
   or?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   startsWith?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type Download = {
+  __typename?: 'Download';
+  courses?: Maybe<CourseRelationResponseCollection>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  download_date?: Maybe<Scalars['Date']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  users_permissions_users?: Maybe<UsersPermissionsUserRelationResponseCollection>;
+};
+
+
+export type DownloadCoursesArgs = {
+  filters?: InputMaybe<CourseFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type DownloadUsers_Permissions_UsersArgs = {
+  filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type DownloadEntity = {
+  __typename?: 'DownloadEntity';
+  attributes?: Maybe<Download>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type DownloadEntityResponse = {
+  __typename?: 'DownloadEntityResponse';
+  data?: Maybe<DownloadEntity>;
+};
+
+export type DownloadEntityResponseCollection = {
+  __typename?: 'DownloadEntityResponseCollection';
+  data: Array<DownloadEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type DownloadFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<DownloadFiltersInput>>>;
+  courses?: InputMaybe<CourseFiltersInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  download_date?: InputMaybe<DateFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<DownloadFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<DownloadFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+  users_permissions_users?: InputMaybe<UsersPermissionsUserFiltersInput>;
+};
+
+export type DownloadInput = {
+  courses?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  download_date?: InputMaybe<Scalars['Date']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  users_permissions_users?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export enum Enum_Course_Level {
@@ -589,7 +679,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = Author | Blog | Book | Category | Channel | Course | I18NLocale | Policy | TermAndCondtion | Topic | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Author | Blog | Book | Category | Channel | Course | Download | I18NLocale | Policy | StrapiGoogleAuthGoogleCredential | TermAndCondtion | Topic | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -709,6 +799,7 @@ export type Mutation = {
   createCategory?: Maybe<CategoryEntityResponse>;
   createChannel?: Maybe<ChannelEntityResponse>;
   createCourse?: Maybe<CourseEntityResponse>;
+  createDownload?: Maybe<DownloadEntityResponse>;
   createTopic?: Maybe<TopicEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -722,7 +813,9 @@ export type Mutation = {
   deleteCategory?: Maybe<CategoryEntityResponse>;
   deleteChannel?: Maybe<ChannelEntityResponse>;
   deleteCourse?: Maybe<CourseEntityResponse>;
+  deleteDownload?: Maybe<DownloadEntityResponse>;
   deletePolicy?: Maybe<PolicyEntityResponse>;
+  deleteStrapiGoogleAuthGoogleCredential?: Maybe<StrapiGoogleAuthGoogleCredentialEntityResponse>;
   deleteTermAndCondtion?: Maybe<TermAndCondtionEntityResponse>;
   deleteTopic?: Maybe<TopicEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -748,8 +841,10 @@ export type Mutation = {
   updateCategory?: Maybe<CategoryEntityResponse>;
   updateChannel?: Maybe<ChannelEntityResponse>;
   updateCourse?: Maybe<CourseEntityResponse>;
+  updateDownload?: Maybe<DownloadEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updatePolicy?: Maybe<PolicyEntityResponse>;
+  updateStrapiGoogleAuthGoogleCredential?: Maybe<StrapiGoogleAuthGoogleCredentialEntityResponse>;
   updateTermAndCondtion?: Maybe<TermAndCondtionEntityResponse>;
   updateTopic?: Maybe<TopicEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -796,6 +891,11 @@ export type MutationCreateChannelArgs = {
 
 export type MutationCreateCourseArgs = {
   data: CourseInput;
+};
+
+
+export type MutationCreateDownloadArgs = {
+  data: DownloadInput;
 };
 
 
@@ -850,6 +950,11 @@ export type MutationDeleteChannelArgs = {
 
 
 export type MutationDeleteCourseArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteDownloadArgs = {
   id: Scalars['ID'];
 };
 
@@ -955,6 +1060,12 @@ export type MutationUpdateCourseArgs = {
 };
 
 
+export type MutationUpdateDownloadArgs = {
+  data: DownloadInput;
+  id: Scalars['ID'];
+};
+
+
 export type MutationUpdateFileInfoArgs = {
   id: Scalars['ID'];
   info?: InputMaybe<FileInfoInput>;
@@ -963,6 +1074,11 @@ export type MutationUpdateFileInfoArgs = {
 
 export type MutationUpdatePolicyArgs = {
   data: PolicyInput;
+};
+
+
+export type MutationUpdateStrapiGoogleAuthGoogleCredentialArgs = {
+  data: StrapiGoogleAuthGoogleCredentialInput;
 };
 
 
@@ -1069,10 +1185,13 @@ export type Query = {
   channels?: Maybe<ChannelEntityResponseCollection>;
   course?: Maybe<CourseEntityResponse>;
   courses?: Maybe<CourseEntityResponseCollection>;
+  download?: Maybe<DownloadEntityResponse>;
+  downloads?: Maybe<DownloadEntityResponseCollection>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
   policy?: Maybe<PolicyEntityResponse>;
+  strapiGoogleAuthGoogleCredential?: Maybe<StrapiGoogleAuthGoogleCredentialEntityResponse>;
   termAndCondtion?: Maybe<TermAndCondtionEntityResponse>;
   topic?: Maybe<TopicEntityResponse>;
   topics?: Maybe<TopicEntityResponseCollection>;
@@ -1165,6 +1284,19 @@ export type QueryCoursesArgs = {
 };
 
 
+export type QueryDownloadArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryDownloadsArgs = {
+  filters?: InputMaybe<DownloadFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
 export type QueryI18NLocaleArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
@@ -1178,6 +1310,11 @@ export type QueryI18NLocalesArgs = {
 
 
 export type QueryPolicyArgs = {
+  publicationState?: InputMaybe<PublicationState>;
+};
+
+
+export type QueryStrapiGoogleAuthGoogleCredentialArgs = {
   publicationState?: InputMaybe<PublicationState>;
 };
 
@@ -1250,6 +1387,36 @@ export type QueryUsersPermissionsUsersArgs = {
 export type ResponseCollectionMeta = {
   __typename?: 'ResponseCollectionMeta';
   pagination: Pagination;
+};
+
+export type StrapiGoogleAuthGoogleCredential = {
+  __typename?: 'StrapiGoogleAuthGoogleCredential';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  google_client_id: Scalars['String'];
+  google_client_secret: Scalars['String'];
+  google_redirect_url: Scalars['String'];
+  google_scopes: Scalars['JSON'];
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type StrapiGoogleAuthGoogleCredentialEntity = {
+  __typename?: 'StrapiGoogleAuthGoogleCredentialEntity';
+  attributes?: Maybe<StrapiGoogleAuthGoogleCredential>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type StrapiGoogleAuthGoogleCredentialEntityResponse = {
+  __typename?: 'StrapiGoogleAuthGoogleCredentialEntityResponse';
+  data?: Maybe<StrapiGoogleAuthGoogleCredentialEntity>;
+};
+
+export type StrapiGoogleAuthGoogleCredentialInput = {
+  google_client_id?: InputMaybe<Scalars['String']>;
+  google_client_secret?: InputMaybe<Scalars['String']>;
+  google_redirect_url?: InputMaybe<Scalars['String']>;
+  google_scopes?: InputMaybe<Scalars['JSON']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type StringFilterInput = {
@@ -1710,9 +1877,12 @@ export type UsersPermissionsUpdateRolePayload = {
 
 export type UsersPermissionsUser = {
   __typename?: 'UsersPermissionsUser';
+  VIP?: Maybe<Scalars['Boolean']>;
   blocked?: Maybe<Scalars['Boolean']>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  download?: Maybe<DownloadEntityResponse>;
+  download_limit?: Maybe<Scalars['Int']>;
   email: Scalars['String'];
   provider?: Maybe<Scalars['String']>;
   role?: Maybe<UsersPermissionsRoleEntityResponse>;
@@ -1738,11 +1908,14 @@ export type UsersPermissionsUserEntityResponseCollection = {
 };
 
 export type UsersPermissionsUserFiltersInput = {
+  VIP?: InputMaybe<BooleanFilterInput>;
   and?: InputMaybe<Array<InputMaybe<UsersPermissionsUserFiltersInput>>>;
   blocked?: InputMaybe<BooleanFilterInput>;
   confirmationToken?: InputMaybe<StringFilterInput>;
   confirmed?: InputMaybe<BooleanFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  download?: InputMaybe<DownloadFiltersInput>;
+  download_limit?: InputMaybe<IntFilterInput>;
   email?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<UsersPermissionsUserFiltersInput>;
@@ -1756,9 +1929,12 @@ export type UsersPermissionsUserFiltersInput = {
 };
 
 export type UsersPermissionsUserInput = {
+  VIP?: InputMaybe<Scalars['Boolean']>;
   blocked?: InputMaybe<Scalars['Boolean']>;
   confirmationToken?: InputMaybe<Scalars['String']>;
   confirmed?: InputMaybe<Scalars['Boolean']>;
+  download?: InputMaybe<Scalars['ID']>;
+  download_limit?: InputMaybe<Scalars['Int']>;
   email?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   provider?: InputMaybe<Scalars['String']>;
