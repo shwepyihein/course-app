@@ -13,7 +13,6 @@ interface CategoryPageProps {
 }
 
 function CategoryPage({ categoryCourseList, slug }: CategoryPageProps) {
-  console.log(categoryCourseList, "course")
   const router = useRouter()
   return (
     <Layout>
@@ -70,7 +69,7 @@ function CategoryPage({ categoryCourseList, slug }: CategoryPageProps) {
 
 export const getServerSideProps = async (context: any) => {
   const slug = context.params.id as string
-  console.log(slug, "asd")
+
   const data = slug.split("-")
 
   try {
@@ -84,7 +83,6 @@ export const getServerSideProps = async (context: any) => {
       },
     }
   } catch (e) {
-    console.log("ERRR", e)
     return {
       notFound: true,
     }

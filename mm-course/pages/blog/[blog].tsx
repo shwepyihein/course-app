@@ -13,7 +13,7 @@ interface blogDetailProps {
 
 const BlogDetail = ({ blogData, LatestBlog }: blogDetailProps) => {
   const router = useRouter()
-  console.log(blogData)
+
   return (
     <Layout>
       <div className="mx-auto min-h-screen mt-20 max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -184,7 +184,7 @@ const BlogDetail = ({ blogData, LatestBlog }: blogDetailProps) => {
 
 export const getServerSideProps = async (context: any) => {
   const slug = context.params.blog as string
-  console.log(slug)
+
   const id = slug?.split("+")[1]
 
   try {
@@ -202,7 +202,6 @@ export const getServerSideProps = async (context: any) => {
       },
     }
   } catch (e) {
-    console.log("ERRR", e)
     return {
       notFound: true,
     }

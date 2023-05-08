@@ -10,6 +10,6 @@ export const Login_user = async (data: any) => {
 
 export const register_user = async (data: any) => {
   const result = await client.request<Query>(MUTATION_Register, { input: data })
-  console.log(result)
+
   return result
 }

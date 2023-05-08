@@ -69,7 +69,7 @@ function CategoryPage({ slug, TopicCourseList }: CategoryPageProps) {
 
 export const getServerSideProps = async (context: any) => {
   const slug = context.params.id as string
-  console.log(slug, "asd")
+
   const data = slug.split("-")
 
   try {
@@ -83,7 +83,6 @@ export const getServerSideProps = async (context: any) => {
       },
     }
   } catch (e) {
-    console.log("ERRR", e)
     return {
       notFound: true,
     }

@@ -9,7 +9,6 @@ interface TopicsListProps {
 }
 
 export default function TopicsList({ TopicsList }: TopicsListProps) {
-  console.log(TopicsList)
   const router = useRouter()
   return (
     <Layout>
@@ -78,7 +77,6 @@ export const getServerSideProps = async () => {
       },
     }
   } catch (e) {
-    console.log("ERRR", e)
     return {
       notFound: true,
     }

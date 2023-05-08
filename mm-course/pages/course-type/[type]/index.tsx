@@ -108,7 +108,6 @@ const CourseFilterPage = ({
 
   useEffect(() => {
     if (filterOpiton) {
-      console.log(filterOpiton)
       setFilterList({ ...filterList, ...filterOpiton })
     }
     setCourseList(courserData.data)
@@ -385,7 +384,7 @@ export const getServerSideProps = async ({
 
   if (channelParams) {
     const channel = channelParams.split("+")
-    console.log(channel)
+
     filterOpiton.channel = channel
     filterQuery.push({ channel: { id: { in: Number(channel) } } })
   }
@@ -411,7 +410,6 @@ export const getServerSideProps = async ({
       },
     }
   } catch (e) {
-    console.log("ERRR", e)
     return {
       notFound: true,
     }

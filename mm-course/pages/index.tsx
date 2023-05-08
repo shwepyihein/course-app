@@ -61,7 +61,7 @@ const FindInterst = [
 ]
 const HomePage = (props: HomePageProps) => {
   const router = useRouter()
-  console.log(props.latestCourse)
+
   return (
     <Layout>
       <NextSeo
@@ -198,7 +198,6 @@ export const getServerSideProps = async ({}) => {
       limit: 10,
       start: 0,
     })
-    console.log(LatestBook)
 
     return {
       props: {
@@ -208,7 +207,6 @@ export const getServerSideProps = async ({}) => {
       },
     }
   } catch (e) {
-    console.log("ERRR", e)
     return {
       notFound: true,
     }

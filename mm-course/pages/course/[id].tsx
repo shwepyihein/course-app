@@ -181,7 +181,6 @@ export const getServerSideProps = async (context: any) => {
   const local = context.locale
   const slug = context.params.id as string
 
-  console.log(slug)
   const id = slug?.split("+")[1]
 
   try {
@@ -202,7 +201,6 @@ export const getServerSideProps = async (context: any) => {
       },
     }
   } catch (e) {
-    console.log("ERRR", e)
     return {
       notFound: true,
     }

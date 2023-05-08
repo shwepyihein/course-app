@@ -24,7 +24,7 @@ export const getCategoryList = async (): Promise<CategoryEntity[] | {}> => {
 
 export const getCategoryRoute = async () => {
   const result = await client.request<Query>(GET_CATEGORY_ROUTE)
-  console.log(result)
+
   const filterRoute = result.topics?.data.map((item: TopicEntity) => {
     const filterCategory = item.attributes?.categories?.data.map(
       (item: CategoryEntity) => {
@@ -34,13 +34,7 @@ export const getCategoryRoute = async () => {
         }
       }
     )
-    console.log(
-      `/topics/${item.attributes?.name
-        ?.toLocaleLowerCase()
-        .split(" ")
-        .join("-")}-${item.id}`,
-      "s"
-    )
+
     return {
       id: item.id,
       name: item.attributes?.name,
@@ -51,7 +45,7 @@ export const getCategoryRoute = async () => {
       submenu: filterCategory ?? [],
     }
   })
-  console.log(filterRoute)
+
   return filterRoute ?? []
 }
 
@@ -83,6 +77,6 @@ export const getCategoryCourseListDetail = async ({
   const result = await client.request<Query>(CATEGORY_COURSE_LIST, {
     categoryId: id,
   })
-  console.log()
+
   return result.courses?.data ?? {}
 }

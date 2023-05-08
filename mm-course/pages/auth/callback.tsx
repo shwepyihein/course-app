@@ -1,29 +1,33 @@
+import axios from "axios"
 import { useRouter } from "next/router"
 import React from "react"
+import { useUserHook } from "../../context/authContext"
 
 const Callback = ({ query }: any) => {
-  const router = useRouter()
+  const { handleGoogle } = useUserHook()
+
   React.useEffect(() => {
+    fetchData()
     // Client-side code to set data in localStorage
-    fetch(
-      `https://api.hunterdox.com/api/auth/google/callback?id_token=${query}`
-    ).then((res: any) => {
-      console.log(res)
-      if (res.ok) {
-        localStorage.setItem("accessToken", res.token)
-        localStorage.setItem("user", JSON.stringify(res.user))
-        router.push("/")
-      } else {
-        throw new Error("Error occur")
-      }
-    })
   }, [])
+  const fetchData = () => {
+    const changeQuery = new URLSearchParams(query).toString()
+    axios
+      .get(`https://api.hunterdox.com/api/auth/google/callback?${changeQuery}`)
+      .then((res: any) => {
+        if (res.status === 200) {
+          handleGoogle(res)
+        } else {
+          throw new Error("Error occur")
+        }
+      })
+  }
   return null
 }
 
 export async function getServerSideProps(context: any) {
   // Fetch data from external API
-  const query = context.query.id_token
+  const query = context.query
   // Pass data to the page via props
   return { props: { query } }
 }

@@ -19,6 +19,7 @@ export interface IUserContext {
   error: ServerError | undefined
   networkError: Error | undefined
   user: any
+  handleGoogle: (res: any) => void
 }
 
 interface IState {
@@ -36,6 +37,7 @@ const defaultState: IUserContext = {
   authLoading: false,
   error: undefined,
   user: null,
+  handleGoogle: () => {},
 }
 
 const AuthContext = createContext<IUserContext>(defaultState)
@@ -82,7 +84,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         identifier: email,
         password: password,
       })
-      console.log(res)
 
       if (res.login) {
         localStorage.setItem("accessToken", res.login.jwt)
@@ -114,12 +115,16 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     } catch (error) {}
   }
-
+  const handleGoogle = (res: any) => {
+    localStorage.setItem("accessToken", res.data.jwt)
+    localStorage.setItem("user", JSON.stringify(res.data.user))
+    setState({ ...state, user: res.data.user, isAuthenticated: true })
+    navigate.push("/")
+  }
   const onSubmit = (data: any) => {
     if (type) {
       Login(data.email, data.password)
     } else {
-      console.log(data)
       Register(data)
     }
   }
@@ -148,6 +153,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           networkError,
           Logout,
           handleOpen,
+          handleGoogle,
           user: state.user,
           error: state.error,
         }}
