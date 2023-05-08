@@ -70,7 +70,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken")
-    const user = localStorage.getItem("user")
+    const user: any = localStorage.getItem("user")
     if (token) {
       setState({ ...state, user: JSON.parse(user), isAuthenticated: true })
     }
