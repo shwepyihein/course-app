@@ -6,5 +6,5 @@ exports.default = ({ env }) => ({
   app: {
     keys: env.array("APP_KEYS"),
   },
-  //   url: "https://api.hunterdox.com/",
+  url: "https://api.hunterdox.com/",
 });
